@@ -1,0 +1,93 @@
+body{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background-color: rgb(4, 4, 19);
+}
+.d1{
+    position: relative;
+    width: 400px;
+    height: 500px;
+    background-color:rgb(34, 38, 237);
+    border-radius: 20px;
+    padding: 40px;
+    box-shadow: 0 0 20px aqua;
+}
+.dd{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+}
+h1{
+    font-size:30px ;
+    color:rgb(22, 19, 19) ;
+    text-align: center ;
+}
+.d2{
+   position: relative;
+    margin: 30px 0;
+    border-bottom: 2px solid white;
+}
+.d2 label{
+    position: absolute;
+    top: 50%;
+    left: 5px;
+    transform: translateY(-50%);
+    font-size: 16px;
+    color: rgb(5, 14, 22);
+    pointer-events: none;
+}
+.d2 input:focus~label,
+.d2 input:valid~label{
+    top: -10px;
+
+}
+.d2 input{
+    width: 320px;
+    height:40px;
+    font-size: 16px;
+    color: rgb(2, 6, 6);
+    padding: 0 5px;
+    background: transparent;
+
+}
+.d3{
+    margin: -5px 0 15px 5px;
+}
+.d3 label{
+    color: #000;
+    font-size: 14px;
+}
+.d3 label input{
+    accent-color: rgb(2, 2, 9);
+}
+button{
+    position: relative;
+    width: 100%;
+    height: 40px;
+    background: black;
+    box-shadow: 0 0 10px aqua;
+    font-size: 20px;
+    color: rgb(249, 249, 255);
+    font-weight: 500;
+    cursor: pointer;
+    border-radius: 30px;
+    border: none;
+    outline: none;
+}
+.d4{
+    font-size: 16px;
+    text-align: center;
+    margin: 15px 0;
+}
+.d4 p{
+color: black;
+}
+.d4 p a {
+    color: aqua;
+    text-decoration: none;
+    font-weight: 500;
+}
