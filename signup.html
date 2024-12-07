@@ -22,18 +22,47 @@
                     <label for="">email</label>
                 </div>
                 <div class="l2">
-                    <input type="password" required>
+                    <input type="password" required id="password">
                     <label for="">password</label>
+                    <img src="./hide.avif"  id="hide">
                 </div>
                 <div class="l2">
-                    <input type="password" required>
+                    <input type="password" required >
                     <label for="">confirm password</label>
+
                 </div>
+                <script>
+                    let eyeicon = document.getElementById("hide");
+                    let password = document.getElementById("password");
+
+                    eyeicon.onclick = function(){
+                        if(password.type == "password"){
+                            password.type = "text"
+                        }else{
+                            password.type = "password"
+                        }
+                    }
+
+                </script>
             </div>
                 <div class="l3">
-                    <label for=""><input type="checkbox">I agree to the terms and conditions</label>
+                    <label for=""><input type="checkbox" id="check" onclick="enable()">I agree to the terms and conditions</label>
                </div>
-               <button type="submit" class="l7">sign up</button>
+               <button disabled="true"  type="submit" id="l7">sign up</button>
+               <script>
+                function enable(){
+                let check = document.getElementById("check");
+                let l7 = document.getElementById("l7");
+
+                if(check.checked){
+                    l7.removeAttribute("disabled");
+                } else {
+                    l7.disabled = "true";
+                }
+                }
+
+
+               </script>
                <div class="l4">
                    <p>Already have an account sign in? <a href="./Login.html">sign in</a></p>
                </div>
