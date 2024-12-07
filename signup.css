@@ -3,7 +3,7 @@ body{
     justify-content: center;
     align-items: center;
     min-height: 100vh;
-    background-color: rgb(4, 4, 19);
+    background-color: rgb(0, 0, 0);
 }
 .container{
     position: relative;
@@ -12,8 +12,8 @@ body{
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: 50px 40px ;
 }
+
 .container span{
     position: absolute;
     left: 0;
@@ -25,6 +25,7 @@ body{
     transform: scale(2.2) rotate(calc(var(--i)*(360deg / 50)));
     animation: animateBlink 3s linear infinite;
     animation-delay: calc(var(--i) * (3s / 50));
+
 }
 @keyframes animateBlink {
     0%{
@@ -33,44 +34,52 @@ body{
     25%{
         background: blue;
     }
+
 }
-.d1{
+.l1{
     position: absolute;
     width: 400px;
-    background-color:rgb(4, 4, 19);
     display: flex;
     flex-direction: column;
     justify-content: center;
+
 }
-.dd{
-    display: flex;
-    justify-content: center;
-    align-items: center;
+.l1 form{
     width: 100%;
-    height: 100%;
+    padding: 0 50px;
+
+
 }
-h1{
-    font-size:30px ;
-    color:rgb(255, 255, 255) ;
-    text-align: center ;
+h2{
+    font-size: 2em;
+    color:rgb(255, 255, 255);
+    text-align: center;
 }
-.d2{
-   position: relative;
-    margin: 30px 0;
+.l2{
+    position: relative;
+    margin: 20px;
 }
-.d2 label{
+.l2 input{
+    width: 100%;
+    height: 50px;
+    background: white;
+    border: 2px solid ;
+    border-radius: 15px;
+    padding: 0 20px;
+    font-size: 16px;
+}
+.l2 label{
     position: absolute;
     top: 50%;
-    left: 5px;
+    left: 20px;
     transform: translateY(-50%);
-    font-size: 18px;
-    color: rgb(5, 14, 22);
+    font-size: 1em;
+    color: black;
     pointer-events: none;
-    font-weight: 530;
     transition: .5s ease;
 }
-.d2 input:focus~label,
-.d2 input:valid~label{
+.l2 input:focus~label,
+.l2 input:valid~label{
     top: -10px;
     font-size: 1em;
     padding: 0 6px;
@@ -78,51 +87,41 @@ h1{
 
 
 }
-.d2 input{
-    width: 320px;
-    height:40px;
-    font-size: 16px;
-    color: rgb(2, 6, 6);
-    padding: 0 20px;
-    background: white;
-    border-radius: 15px;
-    border: 2px solid ;
+.l3{
+    margin: -5px 0 15px 5px;
+    text-align: center;
 
 }
-.d3{
-    margin: -5px 0 15px 5px;
-}
-.d3 label{
+.l3 label{
     color: #ffffff;
     font-size: 16px;
 }
-.d3 label input{
+.l3 label input{
     accent-color: rgb(2, 2, 9);
 }
-button{
-    position: relative;
+
+.l7{
+
     width: 100%;
-    height: 40px;
+    height: 45px;
     background: black;
-    box-shadow: 0 0 10px aqua;
+    box-shadow: 0 0 20px blue;
     font-size: 20px;
     color: rgb(249, 249, 255);
     font-weight: 500;
     cursor: pointer;
-    border-radius: 30px;
+    border-radius: 40px;
     border: none;
     outline: none;
 }
-.d4{
-    font-size: 18px;
+.l4{
+    margin: 20px 0 10px;
     text-align: center;
-    margin: 15px 0;
+    color: #ffffff;
 }
-.d4 p{
-color: rgb(255, 255, 255);
-}
-.d4 p a {
-    color: blue;
+.l4 a{
+    font-size: 1em;
+    color:blue;
     text-decoration: none;
-    font-weight: 500;
+    font-weight: 600;
 }
