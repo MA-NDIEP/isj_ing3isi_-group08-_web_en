@@ -68,3 +68,15 @@ section{
     justify-content: space-between;
 
 }
+
+.header .flex .search-form{
+    background-color: var(--light-bg);
+    color: var(--black);
+    padding: .5rem;
+    height: 4.5rem;
+    width: 4.5rem;
+    line-height: 2.4rem;
+
+}
+
+
