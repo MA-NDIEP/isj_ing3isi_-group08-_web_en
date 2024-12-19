@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Video Gallery</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="background-video-container">
+        <video autoplay muted loop id="bgVideo">
+            <source src="C:\Users\yvans\Desktop\Elementary school girls using digital tablet for lesson online at home 3220670 Stock Video at Vecteezy.mp4" type="video/mp4">
+        </video>
+    </div>
+    <div class="layout">
+        <aside class="sidebar">
+            <h2>Categories</h2>
+            <nav id="categories">
+                <button class="category-btn active" data-category="all">All Videos</button>
+                <div class="category-section">
+                    <h3>Coursejjjs</h3>
+                    <button class="category-btn" data-category="Java">Java</button>
+                    <button class="category-btn" data-category="Algo">Algo</button>
+                    <button class="category-btn" data-category="Python">Python</button>
+                </div>
+                <div class="category-section">
+                    <h3>Tutorials</h3>
+                    <button class="category-btn" data-category="programming">Programming</button>
+                    <button class="category-btn" data-category="design">Design</button>
+                    <button class="category-btn" data-category="cooking">Cooking</button>
+                </div>
+                <button id="signInButton" class="sidebar-action">Sign In</button>
+                <button id="uploadVideoButton" class="sidebar-action hidden">Add Video</button>
+            </nav>
+        </aside>
+
+        <main class="main-content">
+            <header>
+                <div class="header-bar">
+                    <input type="text" id="searchBar" placeholder="Search videos..." />
+                    <div id="userIcon" class="user-icon">
+                        <i class="fas fa-user-circle"></i>
+                    </div>
+                </div>
+                <!-- Modal for Sign-In -->
+                <div id="signInModal" class="modal hidden">
+                    <div class="modal-content">
+                        <h2>Sign In</h2>
+                        <input type="text" id="username" placeholder="Enter username">
+                        <div>
+                            <button id="studentRoleBtn">Sign In as Student</button>
+                            <button id="teacherRoleBtn">Sign In as Teacher</button>
+                        </div>
+                        <button id="signInConfirm" class="hidden">Confirm Sign In</button>
+                    </div>
+                </div>
+
+    <!-- Modal for Upload -->
+    <div id="uploadModal" class="modal hidden">
+        <div class="modal-content">
+            <h2>Upload a Video</h2>
+            <input type="text" id="videoIdInput" placeholder="YouTube Video ID or Link">
+            <select id="videoCategoryInput">
+                <option value="Java">Java</option>
+                <option value="Python">Python</option>
+                <option value="Algo">Algo</option>
+                <option value="programming">Programming</option>
+                <option value="design">Design</option>
+                <option value="cooking">Cooking</option>
+            </select>
+            <button id="uploadConfirm">Add Video</button>
+        </div>
+    </div>
+                <button id="uploadVideoButton" class="hidden">Add Video</button>
+                <h1>Course Outline</h1>
+            </header>
+
+            <div id="video-gallery">
+                <!-- Java Category -->
+                <div class="category-group" data-category="Java">
+                    <h2>Java Courses</h2>
+                    <div class="video-grid">
+                        <div class="video-item">
+                            <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" frameborder="0" allowfullscreen></iframe>
+                            <h3>Java Course 1</h3>
+                        </div>
+                        <div class="video-item">
+                            <iframe src="https://www.youtube.com/embed/3fumBcKC6RE" frameborder="0" allowfullscreen></iframe>
+                            <h3>Java Course 2</h3>
+                        </div>
+                        <div class="video-item">
+                            <iframe src="https://www.youtube.com/embed/9bZkp7q19f0" frameborder="0" allowfullscreen></iframe>
+                            <h3>Java Course 3</h3>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Python Category -->
+                <div class="category-group" data-category="Python">
+                    <h2>Python Courses</h2>
+                    <div class="video-grid">
+                        <div class="video-item">
+                            <iframe src="https://www.youtube.com/embed/rfscVS0vtbw" frameborder="0" allowfullscreen></iframe>
+                            <h3>Python Course 1</h3>
+                        </div>
+                        <div class="video-item">
+                            <iframe src="https://www.youtube.com/embed/6i_tUwFqoNk" frameborder="0" allowfullscreen></iframe>
+                            <h3>Python Course 2</h3>
+                        </div>
+                        <div class="video-item">
+                            <iframe src="https://www.youtube.com/embed/4F2m91eKmts" frameborder="0" allowfullscreen></iframe>
+                            <h3>Python Course 3</h3>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Programming Tutorials -->
+                <div class="category-group" data-category="programming">
+                    <h2>Programming Tutorials</h2>
+                    <div class="video-grid">
+                        <div class="video-item">
+                            <iframe src="https://www.youtube.com/embed/W6NZfCO5SIk" frameborder="0" allowfullscreen></iframe>
+                            <h3>JavaScript Basics</h3>
+                        </div>
+                        <div class="video-item">
+                            <iframe src="https://www.youtube.com/embed/o1IaduQICO0" frameborder="0" allowfullscreen></iframe>
+                            <h3>Python Advanced</h3>
+                        </div>
+                        <div class="video-item">
+                            <iframe src="https://www.youtube.com/embed/Z1RJmh_OqeA" frameborder="0" allowfullscreen></iframe>
+                            <h3>HTML/CSS Overview</h3>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="gallery.js"></script>
+</body>
+</html>
