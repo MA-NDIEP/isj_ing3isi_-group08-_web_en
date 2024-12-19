@@ -5,6 +5,27 @@
     box-sizing: border-box;
 }
 
+.video-actions {
+    display: flex;
+    gap: 10px;
+}
+
+.video-actions button {
+    padding: 5px 10px;
+    cursor: pointer;
+}
+
+.edit-btn {
+    background-color: #4CAF50;
+    color: white;
+}
+
+.delete-btn {
+    background-color: #f44336;
+    color: white;
+}
+
+
 .header-bar {
     display: flex;
     justify-content: space-between;
