@@ -193,6 +193,8 @@ header h1 {
     transition: transform 0.3s;
 }
 
+
+
 .video-item:hover {
     transform: scale(1.05);
 }

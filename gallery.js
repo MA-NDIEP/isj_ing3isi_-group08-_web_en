@@ -17,6 +17,10 @@ document.addEventListener('DOMContentLoaded', () => {
     const teacherRoleBtn = document.getElementById('teacherRoleBtn');
     const userAcronymDisplay = document.getElementById('userAcronym');
     const videoGallery = document.getElementById('video-gallery');
+    const commentSection = document.getElementById('commentSection');
+    const commentInput = document.getElementById('commentInput');
+    const submitCommentBtn = document.getElementById('submitCommentBtn');
+    const commentsList = document.getElementById('commentsList');
 
     let currentUser = null;
     let currentRole = null; // Store user role (student/teacher)
@@ -79,6 +83,7 @@ document.addEventListener('DOMContentLoaded', () => {
             alert(`Welcome, ${username}! You are signed in as a student.`);
             toggleModal(signInModal, false); // Hide the modal
             signInButton.classList.add('hidden'); // Hide sign-in button
+            commentSection.classList.remove('hidden'); // Show comment section for students
             uploadVideoButton.classList.add('hidden'); // Hide upload video button for students
         } else {
             alert('Name not recognized. Please enter a valid student name.');
@@ -94,9 +99,24 @@ document.addEventListener('DOMContentLoaded', () => {
             alert(`Welcome, ${username}! You are signed in as a teacher.`);
             toggleModal(signInModal, false); // Hide the modal
             signInButton.classList.add('hidden'); // Hide sign-in button
+            commentSection.classList.add('hidden'); // Hide comment section for teachers
             uploadVideoButton.classList.remove('hidden'); // Show upload video button for teachers
         } else {
             alert('Name not recognized. Please enter a valid teacher name.');
+        }
+    });
+
+    // Handle comment submission
+    submitCommentBtn.addEventListener('click', () => {
+        const commentText = commentInput.value.trim();
+        if (commentText) {
+            const commentDiv = document.createElement('div');
+            commentDiv.classList.add('comment');
+            commentDiv.textContent = commentText;
+            commentsList.appendChild(commentDiv);
+            commentInput.value = ''; // Clear comment input field
+        } else {
+            alert('Please write a comment before submitting.');
         }
     });
 
