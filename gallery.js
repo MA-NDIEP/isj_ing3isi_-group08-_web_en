@@ -22,7 +22,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const loadVideosFromStorage = () => {
         const storedVideos = JSON.parse(localStorage.getItem('videos')) || [];
-        storedVideos.forEach(video => addVideoToCategory(video.id, video.category, false));
+        storedVideos.forEach(video => addVideoToCategory(video.id, video.category, false, video.name));
     };
 
     const loadCommentsFromStorage = () => {
@@ -39,7 +39,8 @@ document.addEventListener('DOMContentLoaded', () => {
         videoItems.forEach(item => {
             const videoId = item.dataset.videoId;
             const category = item.closest('.category-group').dataset.category;
-            videos.push({ id: videoId, category });
+            const name = item.querySelector('h3').textContent;
+            videos.push({ id: videoId, category, name });
         });
         localStorage.setItem('videos', JSON.stringify(videos));
     };
@@ -94,7 +95,7 @@ document.addEventListener('DOMContentLoaded', () => {
             signOutButton.classList.remove('hidden');
             commentSection.classList.remove('hidden');
             uploadVideoButton.classList.add('hidden');
-            hideTeacherActions(); // Ensure teacher actions are hidden
+            hideTeacherActions();
         } else {
             alert('Name not recognized. Please enter a valid student name.');
         }
@@ -111,7 +112,7 @@ document.addEventListener('DOMContentLoaded', () => {
             signOutButton.classList.remove('hidden');
             commentSection.classList.add('hidden');
             uploadVideoButton.classList.remove('hidden');
-            enableTeacherActions(); // Show teacher actions
+            enableTeacherActions();
         } else {
             alert('Name not recognized. Please enter a valid teacher name.');
         }
@@ -135,23 +136,35 @@ document.addEventListener('DOMContentLoaded', () => {
             const deleteButton = actionsDiv.querySelector('.delete-btn');
 
             editButton.addEventListener('click', () => {
-                const newCategory = prompt('Enter new category for this video:');
-                const newVideoId = prompt('Enter new video ID or URL:');
-                const newYouTubeId = extractYouTubeId(newVideoId);
-                if (newYouTubeId) {
-                    item.querySelector('iframe').src = `https://www.youtube.com/embed/${newYouTubeId}`;
-                    item.closest('.category-group').dataset.category = newCategory;
-                    item.querySelector('h3').textContent = `Updated Video in ${newCategory}`;
-                    saveVideosToStorage();
-                } else {
-                    alert('Invalid YouTube link or ID.');
+                const newName = prompt('Enter new name for this video:');
+                if (newName) {
+                    item.querySelector('h3').textContent = newName;
                 }
+
+                const updateLink = confirm('Do you want to update the video link as well?');
+
+                if (updateLink) {
+                    const newVideoId = prompt('Enter new video ID or URL:');
+                    const newYouTubeId = extractYouTubeId(newVideoId);
+                    if (newYouTubeId) {
+                        item.querySelector('iframe').src = `https://www.youtube.com/embed/${newYouTubeId}`;
+                        item.dataset.videoId = newYouTubeId; // Update dataset to reflect new video ID
+                    } else {
+                        alert('Invalid YouTube link or ID.');
+                    }
+                }
+
+                // Save the updated video details to local storage
+                saveUpdatedVideoToStorage(item);
             });
 
             deleteButton.addEventListener('click', () => {
-                const videoId = item.dataset.videoId;
-                item.remove();
-                deleteVideoFromStorage(videoId);
+                const confirmation = confirm('Are you sure you want to delete this video?');
+                if (confirmation) {
+                    const videoId = item.dataset.videoId;
+                    item.remove();
+                    deleteVideoFromStorage(videoId);
+                }
             });
 
             actionsDiv.classList.remove('hidden');
@@ -166,6 +179,23 @@ document.addEventListener('DOMContentLoaded', () => {
                 actionsDiv.classList.add('hidden');
             }
         });
+    }
+
+    function saveUpdatedVideoToStorage(videoItem) {
+        const videoId = videoItem.dataset.videoId;
+        const category = videoItem.closest('.category-group').dataset.category;
+        const videoName = videoItem.querySelector('h3').textContent;
+
+        const videos = JSON.parse(localStorage.getItem('videos')) || [];
+        const videoIndex = videos.findIndex(video => video.id === videoId);
+
+        if (videoIndex !== -1) {
+            videos[videoIndex] = { id: videoId, category, name: videoName };
+        } else {
+            videos.push({ id: videoId, category, name: videoName });
+        }
+
+        localStorage.setItem('videos', JSON.stringify(videos));
     }
 
     function deleteVideoFromStorage(videoId) {
@@ -201,7 +231,7 @@ document.addEventListener('DOMContentLoaded', () => {
         return match ? match[1] : input.length === 11 ? input : null;
     }
 
-    function addVideoToCategory(youtubeId, category) {
+    function addVideoToCategory(youtubeId, category, save = true, name = 'New Video') {
         let categoryGroup = document.querySelector(`.category-group[data-category="${category}"]`);
         if (!categoryGroup) {
             categoryGroup = document.createElement('div');
@@ -217,7 +247,7 @@ document.addEventListener('DOMContentLoaded', () => {
         newVideo.dataset.videoId = youtubeId;
         newVideo.innerHTML = `
             <iframe src="https://www.youtube.com/embed/${youtubeId}" frameborder="0" allowfullscreen></iframe>
-            <h3>New Video</h3>
+            <h3>${name}</h3>
             <div class="comments-list"></div>
         `;
 
@@ -225,6 +255,8 @@ document.addEventListener('DOMContentLoaded', () => {
         if (currentRole === 'teacher') {
             enableTeacherActions();
         }
+
+        if (save) saveVideosToStorage();
     }
 
     function addCommentToVideo(videoId, commentText) {
