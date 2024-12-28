@@ -1,9 +1,7 @@
 document.addEventListener('DOMContentLoaded', () => {
-    // Define predefined lists of students and teachers
     const students = ['Ramzy', 'Jane Smith', 'Alice Johnson'];
     const teachers = ['Mr. Adams', 'Ms. Brown', 'steph'];
 
-    // DOM elements for various actions
     const categoryButtons = document.querySelectorAll('.category-btn');
     const categoryGroups = document.querySelectorAll('.category-group');
     const signInButton = document.getElementById('signInButton');
@@ -19,17 +17,14 @@ document.addEventListener('DOMContentLoaded', () => {
     const signOutButton = document.getElementById('signOutButton');
     const videoGallery = document.getElementById('video-gallery');
 
-    // Variables to store current user and role
     let currentUser = null;
     let currentRole = null;
 
-    // Function to load videos from local storage and display them in their categories
     const loadVideosFromStorage = () => {
         const storedVideos = JSON.parse(localStorage.getItem('videos')) || [];
         storedVideos.forEach(video => addVideoToCategory(video.id, video.category, false));
     };
 
-    // Function to load comments from local storage and display them under respective videos
     const loadCommentsFromStorage = () => {
         const storedComments = JSON.parse(localStorage.getItem('comments')) || {};
         Object.keys(storedComments).forEach(videoId => {
@@ -38,7 +33,6 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     };
 
-    // Function to save all videos to local storage
     const saveVideosToStorage = () => {
         const videos = [];
         const videoItems = document.querySelectorAll('.video-item');
@@ -50,7 +44,6 @@ document.addEventListener('DOMContentLoaded', () => {
         localStorage.setItem('videos', JSON.stringify(videos));
     };
 
-    // Function to save all comments to local storage
     const saveCommentsToStorage = () => {
         const comments = {};
         const videoItems = document.querySelectorAll('.video-item');
@@ -62,7 +55,6 @@ document.addEventListener('DOMContentLoaded', () => {
         localStorage.setItem('comments', JSON.stringify(comments));
     };
 
-    // Function to filter videos by category
     function filterVideos(category) {
         if (category === 'all') {
             categoryGroups.forEach(group => group.classList.remove('hidden'));
@@ -77,7 +69,6 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    // Add click event listeners to category buttons
     categoryButtons.forEach(button => {
         button.addEventListener('click', () => {
             categoryButtons.forEach(btn => btn.classList.remove('active'));
@@ -86,12 +77,12 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // Function to show or hide modals
     function toggleModal(modal, show) {
         modal.classList.toggle('hidden', !show);
     }
 
-    // Event listener for student sign-in
+    signInButton.addEventListener('click', () => toggleModal(signInModal, true));
+
     studentRoleBtn.addEventListener('click', () => {
         const username = usernameInput.value.trim();
         if (students.includes(username)) {
@@ -109,7 +100,6 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    // Event listener for teacher sign-in
     teacherRoleBtn.addEventListener('click', () => {
         const username = usernameInput.value.trim();
         if (teachers.includes(username)) {
@@ -127,7 +117,6 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    // Function to enable teacher-specific actions like edit and delete
     function enableTeacherActions() {
         const videoItems = document.querySelectorAll('.video-item');
         videoItems.forEach(item => {
@@ -145,7 +134,6 @@ document.addEventListener('DOMContentLoaded', () => {
             const editButton = actionsDiv.querySelector('.edit-btn');
             const deleteButton = actionsDiv.querySelector('.delete-btn');
 
-            // Edit video event
             editButton.addEventListener('click', () => {
                 const newCategory = prompt('Enter new category for this video:');
                 const newVideoId = prompt('Enter new video ID or URL:');
@@ -160,7 +148,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
             });
 
-            // Delete video event
             deleteButton.addEventListener('click', () => {
                 const videoId = item.dataset.videoId;
                 item.remove();
@@ -171,7 +158,6 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // Function to hide teacher-specific actions
     function hideTeacherActions() {
         const videoItems = document.querySelectorAll('.video-item');
         videoItems.forEach(item => {
@@ -182,7 +168,6 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // Function to delete a video and its comments from local storage
     function deleteVideoFromStorage(videoId) {
         const videos = JSON.parse(localStorage.getItem('videos')) || [];
         const filteredVideos = videos.filter(video => video.id !== videoId);
@@ -193,10 +178,8 @@ document.addEventListener('DOMContentLoaded', () => {
         localStorage.setItem('comments', JSON.stringify(comments));
     }
 
-    // Event listener for video upload button
     uploadVideoButton.addEventListener('click', () => toggleModal(uploadModal, true));
 
-    // Handle video upload confirmation
     document.getElementById('uploadConfirm').addEventListener('click', () => {
         const videoIdInput = document.getElementById('videoIdInput').value.trim();
         const category = document.getElementById('videoCategoryInput').value.trim();
@@ -212,14 +195,12 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    // Function to extract YouTube video ID from a URL or ID
     function extractYouTubeId(input) {
         const regex = /(?:https?:\/\/(?:www\.)?youtube\.com\/(?:watch\?v=|embed\/|v\/)|youtu\.be\/)([a-zA-Z0-9_-]{11})/;
         const match = input.match(regex);
         return match ? match[1] : input.length === 11 ? input : null;
     }
 
-    // Function to add a new video to a category
     function addVideoToCategory(youtubeId, category) {
         let categoryGroup = document.querySelector(`.category-group[data-category="${category}"]`);
         if (!categoryGroup) {
@@ -246,7 +227,6 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    // Function to add a comment to a specific video
     function addCommentToVideo(videoId, commentText) {
         const videoItem = document.querySelector(`.video-item[data-video-id="${videoId}"]`);
         const commentDiv = document.createElement('div');
@@ -257,7 +237,6 @@ document.addEventListener('DOMContentLoaded', () => {
         commentsList.appendChild(commentDiv);
     }
 
-    // Event listener for submitting a comment
     submitCommentBtn.addEventListener('click', () => {
         const commentText = commentInput.value.trim();
         const videoId = commentInput.dataset.videoId;
@@ -270,7 +249,6 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    // Load videos and comments from local storage on page load
     loadVideosFromStorage();
     loadCommentsFromStorage();
 });
