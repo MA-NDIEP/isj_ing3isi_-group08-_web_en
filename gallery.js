@@ -1,31 +1,68 @@
 document.addEventListener('DOMContentLoaded', () => {
-    // Predefined names for students and teachers
-    const students = ['John Doe', 'Jane Smith', 'Alice Johnson']; // Predefined student names
-    const teachers = ['Mr. Adams', 'Ms. Brown', 'White'];   // Predefined teacher names
+    // Define predefined lists of students and teachers
+    const students = ['Ramzy', 'Jane Smith', 'Alice Johnson'];
+    const teachers = ['Mr. Adams', 'Ms. Brown', 'steph'];
 
-    // Variables for UI elements
+    // DOM elements for various actions
     const categoryButtons = document.querySelectorAll('.category-btn');
     const categoryGroups = document.querySelectorAll('.category-group');
-    const videoItems = document.querySelectorAll('.video-item');
     const signInButton = document.getElementById('signInButton');
     const uploadVideoButton = document.getElementById('uploadVideoButton');
     const signInModal = document.getElementById('signInModal');
     const uploadModal = document.getElementById('uploadModal');
-    const signInConfirmButton = document.getElementById('signInConfirm');
     const usernameInput = document.getElementById('username');
     const studentRoleBtn = document.getElementById('studentRoleBtn');
     const teacherRoleBtn = document.getElementById('teacherRoleBtn');
-    const userAcronymDisplay = document.getElementById('userAcronym');
-    const videoGallery = document.getElementById('video-gallery');
     const commentSection = document.getElementById('commentSection');
     const commentInput = document.getElementById('commentInput');
     const submitCommentBtn = document.getElementById('submitCommentBtn');
-    const commentsList = document.getElementById('commentsList');
+    const signOutButton = document.getElementById('signOutButton');
+    const videoGallery = document.getElementById('video-gallery');
 
+    // Variables to store current user and role
     let currentUser = null;
-    let currentRole = null; // Store user role (student/teacher)
+    let currentRole = null;
 
-    // Category filtering logic
+    // Function to load videos from local storage and display them in their categories
+    const loadVideosFromStorage = () => {
+        const storedVideos = JSON.parse(localStorage.getItem('videos')) || [];
+        storedVideos.forEach(video => addVideoToCategory(video.id, video.category, false));
+    };
+
+    // Function to load comments from local storage and display them under respective videos
+    const loadCommentsFromStorage = () => {
+        const storedComments = JSON.parse(localStorage.getItem('comments')) || {};
+        Object.keys(storedComments).forEach(videoId => {
+            const comments = storedComments[videoId];
+            comments.forEach(comment => addCommentToVideo(videoId, comment));
+        });
+    };
+
+    // Function to save all videos to local storage
+    const saveVideosToStorage = () => {
+        const videos = [];
+        const videoItems = document.querySelectorAll('.video-item');
+        videoItems.forEach(item => {
+            const videoId = item.dataset.videoId;
+            const category = item.closest('.category-group').dataset.category;
+            videos.push({ id: videoId, category });
+        });
+        localStorage.setItem('videos', JSON.stringify(videos));
+    };
+
+    // Function to save all comments to local storage
+    const saveCommentsToStorage = () => {
+        const comments = {};
+        const videoItems = document.querySelectorAll('.video-item');
+        videoItems.forEach(item => {
+            const videoId = item.dataset.videoId;
+            const videoComments = item.querySelectorAll('.comment');
+            comments[videoId] = Array.from(videoComments).map(comment => comment.textContent);
+        });
+        localStorage.setItem('comments', JSON.stringify(comments));
+    };
+
+    // Function to filter videos by category
     function filterVideos(category) {
         if (category === 'all') {
             categoryGroups.forEach(group => group.classList.remove('hidden'));
@@ -40,230 +77,200 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
+    // Add click event listeners to category buttons
     categoryButtons.forEach(button => {
         button.addEventListener('click', () => {
             categoryButtons.forEach(btn => btn.classList.remove('active'));
             button.classList.add('active');
-
-            const category = button.dataset.category;
-            filterVideos(category);
+            filterVideos(button.dataset.category);
         });
     });
 
-    // Search functionality
-    const searchBar = document.getElementById('searchBar');
-    searchBar.addEventListener('input', event => {
-        const query = event.target.value.toLowerCase();
-        videoItems.forEach(item => {
-            const title = item.querySelector('h3').innerText.toLowerCase();
-            if (title.includes(query)) {
-                item.classList.remove('hidden');
-            } else {
-                item.classList.add('hidden');
-            }
-        });
-    });
-
-    // Toggle modal visibility
+    // Function to show or hide modals
     function toggleModal(modal, show) {
         modal.classList.toggle('hidden', !show);
     }
 
-    // Sign-In Logic - Show role selection modal
-    signInButton.addEventListener('click', () => {
-        toggleModal(signInModal, true); // Show sign-in modal
-    });
-
-    // Role selection - Student
+    // Event listener for student sign-in
     studentRoleBtn.addEventListener('click', () => {
         const username = usernameInput.value.trim();
         if (students.includes(username)) {
             currentUser = username;
             currentRole = 'student';
             alert(`Welcome, ${username}! You are signed in as a student.`);
-            toggleModal(signInModal, false); // Hide the modal
-            signInButton.classList.add('hidden'); // Hide sign-in button
-            commentSection.classList.remove('hidden'); // Show comment section for students
-            uploadVideoButton.classList.add('hidden'); // Hide upload video button for students
+            toggleModal(signInModal, false);
+            signInButton.classList.add('hidden');
+            signOutButton.classList.remove('hidden');
+            commentSection.classList.remove('hidden');
+            uploadVideoButton.classList.add('hidden');
+            hideTeacherActions(); // Ensure teacher actions are hidden
         } else {
             alert('Name not recognized. Please enter a valid student name.');
         }
     });
 
-    // Role selection - Teacher
+    // Event listener for teacher sign-in
     teacherRoleBtn.addEventListener('click', () => {
         const username = usernameInput.value.trim();
         if (teachers.includes(username)) {
             currentUser = username;
             currentRole = 'teacher';
             alert(`Welcome, ${username}! You are signed in as a teacher.`);
-            toggleModal(signInModal, false); // Hide the modal
-            signInButton.classList.add('hidden'); // Hide sign-in button
-            commentSection.classList.add('hidden'); // Hide comment section for teachers
-            uploadVideoButton.classList.remove('hidden'); // Show upload video button for teachers
+            toggleModal(signInModal, false);
+            signInButton.classList.add('hidden');
+            signOutButton.classList.remove('hidden');
+            commentSection.classList.add('hidden');
+            uploadVideoButton.classList.remove('hidden');
+            enableTeacherActions(); // Show teacher actions
         } else {
             alert('Name not recognized. Please enter a valid teacher name.');
         }
     });
 
-    // Handle comment submission
-    submitCommentBtn.addEventListener('click', () => {
-        const commentText = commentInput.value.trim();
-        if (commentText) {
-            const commentDiv = document.createElement('div');
-            commentDiv.classList.add('comment');
-            commentDiv.textContent = commentText;
-            commentsList.appendChild(commentDiv);
-            commentInput.value = ''; // Clear comment input field
-        } else {
-            alert('Please write a comment before submitting.');
-        }
-    });
-
-    // Upload Video Logic (Only for teachers)
-    uploadVideoButton.addEventListener('click', () => {
-        if (currentRole !== 'teacher') {
-            alert('Only teachers can upload videos.');
-            return;
-        }
-        toggleModal(uploadModal, true);
-    });
-
-    // Upload Video Modal Confirmation
-    document.getElementById('uploadConfirm').addEventListener('click', () => {
-        if (currentRole !== 'teacher') {
-            alert('Only teachers can upload videos.');
-            return;
-        }
-
-        const videoIdInput = document.getElementById('videoIdInput').value.trim();
-        const category = document.getElementById('videoCategoryInput').value;
-
-        if (videoIdInput && category) {
-            const youtubeId = extractYouTubeId(videoIdInput);
-            if (youtubeId) {
-                addVideoToCategory(youtubeId, category);
-                toggleModal(uploadModal, false);
-                alert('Video added successfully!');
-            } else {
-                alert('Invalid YouTube link or ID.');
+    // Function to enable teacher-specific actions like edit and delete
+    function enableTeacherActions() {
+        const videoItems = document.querySelectorAll('.video-item');
+        videoItems.forEach(item => {
+            let actionsDiv = item.querySelector('.video-actions');
+            if (!actionsDiv) {
+                actionsDiv = document.createElement('div');
+                actionsDiv.classList.add('video-actions');
+                actionsDiv.innerHTML = `
+                    <button class="edit-btn">Edit</button>
+                    <button class="delete-btn">Delete</button>
+                `;
+                item.appendChild(actionsDiv);
             }
+
+            const editButton = actionsDiv.querySelector('.edit-btn');
+            const deleteButton = actionsDiv.querySelector('.delete-btn');
+
+            // Edit video event
+            editButton.addEventListener('click', () => {
+                const newCategory = prompt('Enter new category for this video:');
+                const newVideoId = prompt('Enter new video ID or URL:');
+                const newYouTubeId = extractYouTubeId(newVideoId);
+                if (newYouTubeId) {
+                    item.querySelector('iframe').src = `https://www.youtube.com/embed/${newYouTubeId}`;
+                    item.closest('.category-group').dataset.category = newCategory;
+                    item.querySelector('h3').textContent = `Updated Video in ${newCategory}`;
+                    saveVideosToStorage();
+                } else {
+                    alert('Invalid YouTube link or ID.');
+                }
+            });
+
+            // Delete video event
+            deleteButton.addEventListener('click', () => {
+                const videoId = item.dataset.videoId;
+                item.remove();
+                deleteVideoFromStorage(videoId);
+            });
+
+            actionsDiv.classList.remove('hidden');
+        });
+    }
+
+    // Function to hide teacher-specific actions
+    function hideTeacherActions() {
+        const videoItems = document.querySelectorAll('.video-item');
+        videoItems.forEach(item => {
+            const actionsDiv = item.querySelector('.video-actions');
+            if (actionsDiv) {
+                actionsDiv.classList.add('hidden');
+            }
+        });
+    }
+
+    // Function to delete a video and its comments from local storage
+    function deleteVideoFromStorage(videoId) {
+        const videos = JSON.parse(localStorage.getItem('videos')) || [];
+        const filteredVideos = videos.filter(video => video.id !== videoId);
+        localStorage.setItem('videos', JSON.stringify(filteredVideos));
+
+        const comments = JSON.parse(localStorage.getItem('comments')) || {};
+        delete comments[videoId];
+        localStorage.setItem('comments', JSON.stringify(comments));
+    }
+
+    // Event listener for video upload button
+    uploadVideoButton.addEventListener('click', () => toggleModal(uploadModal, true));
+
+    // Handle video upload confirmation
+    document.getElementById('uploadConfirm').addEventListener('click', () => {
+        const videoIdInput = document.getElementById('videoIdInput').value.trim();
+        const category = document.getElementById('videoCategoryInput').value.trim();
+
+        const youtubeId = extractYouTubeId(videoIdInput);
+        if (youtubeId && category) {
+            addVideoToCategory(youtubeId, category);
+            saveVideosToStorage();
+            toggleModal(uploadModal, false);
+            alert('Video added successfully!');
         } else {
-            alert('Please provide all the details.');
+            alert('Invalid details. Please try again.');
         }
     });
 
-    // Extract YouTube video ID from URL or direct ID
+    // Function to extract YouTube video ID from a URL or ID
     function extractYouTubeId(input) {
         const regex = /(?:https?:\/\/(?:www\.)?youtube\.com\/(?:watch\?v=|embed\/|v\/)|youtu\.be\/)([a-zA-Z0-9_-]{11})/;
         const match = input.match(regex);
         return match ? match[1] : input.length === 11 ? input : null;
     }
 
-    // Add video dynamically to the category
-function addVideoToCategory(youtubeId, category) {
-    let categoryGroup = document.querySelector(`.category-group[data-category="${category}"]`);
-    if (!categoryGroup) {
-        // If category group doesn't exist, create it
-        categoryGroup = document.createElement('div');
-        categoryGroup.classList.add('category-group');
-        categoryGroup.dataset.category = category;
-        categoryGroup.innerHTML = `<h2>${category} Videos</h2><div class="video-grid"></div>`;
-        videoGallery.appendChild(categoryGroup);
-    }
+    // Function to add a new video to a category
+    function addVideoToCategory(youtubeId, category) {
+        let categoryGroup = document.querySelector(`.category-group[data-category="${category}"]`);
+        if (!categoryGroup) {
+            categoryGroup = document.createElement('div');
+            categoryGroup.classList.add('category-group');
+            categoryGroup.dataset.category = category;
+            categoryGroup.innerHTML = `<h2>${category} Videos</h2><div class="video-grid"></div>`;
+            videoGallery.appendChild(categoryGroup);
+        }
 
-    const videoGrid = categoryGroup.querySelector('.video-grid');
-    const newVideo = document.createElement('div');
-    newVideo.classList.add('video-item');
-    newVideo.innerHTML = `
-        <iframe src="https://www.youtube.com/embed/${youtubeId}" frameborder="0" allowfullscreen></iframe>
-        <h3>New Video</h3>
-    `;
-
-    // Only show Edit and Delete buttons if the user is a teacher
-    if (currentRole === 'teacher') {
-        newVideo.innerHTML += `
-            <div class="video-actions">
-                <button class="edit-btn">Edit</button>
-                <button class="delete-btn">Delete</button>
-            </div>
+        const videoGrid = categoryGroup.querySelector('.video-grid');
+        const newVideo = document.createElement('div');
+        newVideo.classList.add('video-item');
+        newVideo.dataset.videoId = youtubeId;
+        newVideo.innerHTML = `
+            <iframe src="https://www.youtube.com/embed/${youtubeId}" frameborder="0" allowfullscreen></iframe>
+            <h3>New Video</h3>
+            <div class="comments-list"></div>
         `;
+
+        videoGrid.appendChild(newVideo);
+        if (currentRole === 'teacher') {
+            enableTeacherActions();
+        }
     }
 
-    videoGrid.appendChild(newVideo);
+    // Function to add a comment to a specific video
+    function addCommentToVideo(videoId, commentText) {
+        const videoItem = document.querySelector(`.video-item[data-video-id="${videoId}"]`);
+        const commentDiv = document.createElement('div');
+        commentDiv.classList.add('comment');
+        commentDiv.textContent = commentText;
 
-    // Handle delete button
-    const deleteButton = newVideo.querySelector('.delete-btn');
-    if (deleteButton) {
-        deleteButton.addEventListener('click', () => {
-            if (currentRole === 'teacher') {
-                // Confirm deletion and remove the video
-                const confirmation = confirm('Are you sure you want to delete this video?');
-                if (confirmation) {
-                    newVideo.remove(); // Remove the video item from the grid
-                    alert('Video deleted successfully!');
-                }
-            } else {
-                alert('Only teachers can delete videos.');
-            }
-        });
+        const commentsList = videoItem.querySelector('.comments-list');
+        commentsList.appendChild(commentDiv);
     }
 
-    // Handle edit button
-    const editButton = newVideo.querySelector('.edit-btn');
-    if (editButton) {
-        editButton.addEventListener('click', () => {
-            if (currentRole === 'teacher') {
-                // Allow the teacher to edit the video title and/or video link
-                const newTitle = prompt('Enter a new title for this video:', newVideo.querySelector('h3').innerText);
-                const newVideoLink = prompt('Enter a new YouTube video URL:', `https://www.youtube.com/watch?v=${youtubeId}`);
-
-                if (newTitle && newVideoLink) {
-                    const newVideoId = extractYouTubeId(newVideoLink); // Extract the YouTube ID from the new link
-                    if (newVideoId) {
-                        // Update the iframe with the new video ID
-                        newVideo.querySelector('iframe').src = `https://www.youtube.com/embed/${newVideoId}`;
-                        newVideo.querySelector('h3').innerText = newTitle;
-                        alert('Video updated successfully!');
-                    } else {
-                        alert('Invalid YouTube URL.');
-                    }
-                }
-            } else {
-                alert('Only teachers can edit videos.');
-            }
-        });
-    }
-
-
-        // Edit button handler
-        editButton.addEventListener('click', () => {
-            const newTitle = prompt('Enter new video title:', newVideo.querySelector('h3').innerText);
-            if (newTitle) {
-                newVideo.querySelector('h3').innerText = newTitle;
-            }
-        });
-
-        // Delete button handler
-        deleteButton.addEventListener('click', () => {
-            if (confirm('Are you sure you want to delete this video?')) {
-                newVideo.remove();
-            }
-        });
-    }
-
-    // Pause all other videos when one video starts playing
-    videoItems.forEach(item => {
-        const video = item.querySelector('video');
-        if (video) {
-            video.addEventListener('play', () => {
-                videoItems.forEach(otherItem => {
-                    const otherVideo = otherItem.querySelector('video');
-                    if (otherVideo !== video) {
-                        otherVideo.pause();
-                    }
-                });
-            });
+    // Event listener for submitting a comment
+    submitCommentBtn.addEventListener('click', () => {
+        const commentText = commentInput.value.trim();
+        const videoId = commentInput.dataset.videoId;
+        if (commentText) {
+            addCommentToVideo(videoId, commentText);
+            saveCommentsToStorage();
+            commentInput.value = '';
+        } else {
+            alert('Please write a comment before submitting.');
         }
     });
+
+    // Load videos and comments from local storage on page load
+    loadVideosFromStorage();
+    loadCommentsFromStorage();
 });

@@ -33,6 +33,8 @@
                 </div>
                 <button id="signInButton" class="sidebar-action">Sign In</button>
                 <button id="uploadVideoButton" class="sidebar-action hidden">Add Video</button>
+                <button id="signOutButton" class="hidden">Sign Out</button>
+
             </nav>
         </aside>
 
@@ -77,30 +79,19 @@
                 <h1>Course Outline</h1>
             </header>
 
-            <div id="commentSection" class="hidden">
-                <h2>Write a Comment</h2>
-                <textarea id="commentInput" placeholder="Write your comment here..."></textarea>
-                <button id="submitCommentBtn">Submit Comment</button>
-                <div id="commentsList"></div>
-            </div>
+           <!-- Comment Section (Visible for Students) -->
+             <div id="commentSection" class="hidden">
+                 <textarea id="commentInput" placeholder="Write a comment..."></textarea>
+                 <button id="submitCommentBtn">Submit Comment</button>
+                 <div id="commentsList"></div>
+             </div>
 
             <div id="video-gallery">
                 <!-- Java Category -->
                 <div class="category-group" data-category="Java">
                     <h2>Java Courses</h2>
                     <div class="video-grid">
-                        <div class="video-item">
-                            <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" frameborder="0" allowfullscreen></iframe>
-                            <h3>Java Course 1</h3>
-                        </div>
-                        <div class="video-item">
-                            <iframe src="https://www.youtube.com/embed/3fumBcKC6RE" frameborder="0" allowfullscreen></iframe>
-                            <h3>Java Course 2</h3>
-                        </div>
-                        <div class="video-item">
-                            <iframe src="https://www.youtube.com/embed/9bZkp7q19f0" frameborder="0" allowfullscreen></iframe>
-                            <h3>Java Course 3</h3>
-                        </div>
+
                     </div>
                 </div>
 
@@ -108,18 +99,7 @@
                 <div class="category-group" data-category="Python">
                     <h2>Python Courses</h2>
                     <div class="video-grid">
-                        <div class="video-item">
-                            <iframe src="https://www.youtube.com/embed/rfscVS0vtbw" frameborder="0" allowfullscreen></iframe>
-                            <h3>Python Course 1</h3>
-                        </div>
-                        <div class="video-item">
-                            <iframe src="https://www.youtube.com/embed/6i_tUwFqoNk" frameborder="0" allowfullscreen></iframe>
-                            <h3>Python Course 2</h3>
-                        </div>
-                        <div class="video-item">
-                            <iframe src="https://www.youtube.com/embed/4F2m91eKmts" frameborder="0" allowfullscreen></iframe>
-                            <h3>Python Course 3</h3>
-                        </div>
+
                     </div>
                 </div>
 
@@ -127,18 +107,7 @@
                 <div class="category-group" data-category="programming">
                     <h2>Programming Tutorials</h2>
                     <div class="video-grid">
-                        <div class="video-item">
-                            <iframe src="https://www.youtube.com/embed/W6NZfCO5SIk" frameborder="0" allowfullscreen></iframe>
-                            <h3>JavaScript Basics</h3>
-                        </div>
-                        <div class="video-item">
-                            <iframe src="https://www.youtube.com/embed/o1IaduQICO0" frameborder="0" allowfullscreen></iframe>
-                            <h3>Python Advanced</h3>
-                        </div>
-                        <div class="video-item">
-                            <iframe src="https://www.youtube.com/embed/Z1RJmh_OqeA" frameborder="0" allowfullscreen></iframe>
-                            <h3>HTML/CSS Overview</h3>
-                        </div>
+
                     </div>
                 </div>
             </div>
