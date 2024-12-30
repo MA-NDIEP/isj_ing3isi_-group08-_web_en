@@ -46,6 +46,15 @@
                         <i class="fas fa-user-circle"></i>
                     </div>
                 </div>
+                <!-- User Comments Modal -->
+                 <div id="userCommentsModal" class="modal hidden">
+                    <div class="modal-content">
+                        <h2>Your Comments</h2>
+                        <ul id="userCommentsList"></ul>
+                        <button id="closeUserCommentsModal" class="modal-close-btn">Close</button>
+                    </div>
+                </div>
+
                 <!-- Modal for Sign-In -->
                 <div id="signInModal" class="modal hidden">
                     <div class="modal-content">
@@ -75,6 +84,15 @@
                         <ul id="enrollmentSummaryList"></ul>
                         <button id="closeSummaryButton">Close</button>
                     </div></div>
+
+                    <!-- User Comments Modal -->
+<div id="userCommentsModal" class="modal hidden">
+    <div class="modal-content">
+        <h2>Your Comments</h2>
+        <ul id="userCommentsList"></ul>
+        <button id="closeUserCommentsModal" class="modal-close-btn">Close</button>
+    </div>
+</div>
 
 
                 <!-- Course Enrollment Modal -->
@@ -145,8 +163,10 @@
 
                     </div>
                 </div>
+                <button id="resetEnrollmentButton">Reset Enrollment Counts</button>
             </div>
         </main>
+
     </div>
 
     <script src="gallery.js"></script>

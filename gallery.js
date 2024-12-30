@@ -88,6 +88,7 @@ document.addEventListener('DOMContentLoaded', () => {
         toggleModal(document.getElementById('enrollmentSummaryModal'), true);
     };
 
+    document.getElementById('resetEnrollmentButton').addEventListener('click', resetEnrollmentCounts);
     document.getElementById('closeSummaryButton').addEventListener('click', () => {
         toggleModal(document.getElementById('enrollmentSummaryModal'), false);
     });
@@ -427,6 +428,12 @@ function filterEnrolledVideos() {
             commentCountIcon.textContent = `🗨️ ${commentCount}`;
         }
     }
+    // Function to reset the enrollment counter
+function resetEnrollmentCounts() {
+    localStorage.setItem('enrollmentCounts', JSON.stringify({}));
+    alert('Enrollment counts have been reset.');
+}
+
 
     loadVideosFromStorage();
     loadCommentsFromStorage();
