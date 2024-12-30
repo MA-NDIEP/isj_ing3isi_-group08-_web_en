@@ -111,7 +111,9 @@ body {
 }
 
 .modal-content {
-    text-align: center;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
 }
 
 .modal ul {
@@ -121,6 +123,20 @@ body {
 
 .modal ul li {
     margin: 10px 0;
+}
+
+#closeSummaryButton {
+    background-color: #f44336;
+    color: white;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+#closeSummaryButton:hover {
+    background-color: #c0392b;
 }
 
 /* Background Video */
@@ -257,7 +273,17 @@ header h1 {
     color: #2c3e50;
 }
 
+
+
 .hidden {
+    display: none;
+}
+
+#video-gallery .video-item {
+    margin: 10px 0;
+}
+
+.video-actions.hidden {
     display: none;
 }
 

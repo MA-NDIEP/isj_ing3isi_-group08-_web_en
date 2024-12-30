@@ -18,9 +18,12 @@ document.addEventListener('DOMContentLoaded', () => {
     const videoGallery = document.getElementById('video-gallery');
     const enrollmentModal = document.getElementById('enrollmentModal');
     const enrollConfirmButton = document.getElementById('enrollConfirm');
+    const signInConfirm = document.getElementById('signInConfirm');
+    const teacherCategoryDropdown = document.getElementById('teacherCategoryDropdown');
     let enrolledCourses = [];
     let currentUser = null;
     let currentRole = null;
+    let teacherCategory = null;
 
     const loadVideosFromStorage = () => {
         const storedVideos = JSON.parse(localStorage.getItem('videos')) || [];
@@ -212,15 +215,11 @@ function filterEnrolledVideos() {
             currentRole = 'teacher';
             const acronym = username.split(' ').map(word => word[0]).join('');
             const commentCount = Object.values(JSON.parse(localStorage.getItem('comments')) || {}).flat().length;
-
-            alert(`Welcome, ${username}! You are signed in as a teacher.`);
-            toggleModal(signInModal, false);
-            signInButton.classList.add('hidden');
-            signOutButton.classList.remove('hidden');
             commentSection.classList.add('hidden');
-            uploadVideoButton.classList.remove('hidden');
-            enableTeacherActions();
-
+            // Show the category dropdown and confirm button
+            teacherCategoryDropdown.classList.remove('hidden');
+            signInConfirm.classList.remove('hidden');
+            console.log('Dropdown visibility toggled for teacher.');
             const headerBar = document.querySelector('.header-bar');
             headerBar.innerHTML += `
                 <div class="teacher-acronym">
@@ -228,18 +227,34 @@ function filterEnrolledVideos() {
                     <span id="commentCountIcon">🗨️ ${commentCount}</span>
                 </div>`;
 
-            // Show enrollment summary automatically
-            showEnrollmentSummary();
         } else {
             alert('Name not recognized. Please enter a valid teacher name.');
         }
     });
 
 
+    signInConfirm.addEventListener('click', () => {
+        teacherCategory = document.getElementById('teacherCategory').value;
+        if (!teacherCategory) {
+            alert('Please select a category before proceeding.');
+            return;
+        }
+
+        alert(`Welcome, ${currentUser}! You are signed in as a teacher of ${teacherCategory}.`);
+        toggleModal(signInModal, false);
+        signInButton.classList.add('hidden');
+        signOutButton.classList.remove('hidden');
+        uploadVideoButton.classList.remove('hidden');
+        // Show enrollment summary automatically
+        showEnrollmentSummary();
+        enableTeacherActions(); // Call to initialize teacher privileges
+    });
+
     function enableTeacherActions() {
         const videoItems = document.querySelectorAll('.video-item');
         videoItems.forEach(item => {
             let actionsDiv = item.querySelector('.video-actions');
+            const category = item.closest('.category-group').dataset.category;
             if (!actionsDiv) {
                 actionsDiv = document.createElement('div');
                 actionsDiv.classList.add('video-actions');
