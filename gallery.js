@@ -16,7 +16,9 @@ document.addEventListener('DOMContentLoaded', () => {
     const submitCommentBtn = document.getElementById('submitCommentBtn');
     const signOutButton = document.getElementById('signOutButton');
     const videoGallery = document.getElementById('video-gallery');
-
+    const enrollmentModal = document.getElementById('enrollmentModal');
+    const enrollConfirmButton = document.getElementById('enrollConfirm');
+    let enrolledCourses = [];
     let currentUser = null;
     let currentRole = null;
 
@@ -56,25 +58,43 @@ document.addEventListener('DOMContentLoaded', () => {
         localStorage.setItem('comments', JSON.stringify(comments));
     };
 
-    function filterVideos(category) {
-        if (category === 'all') {
-            categoryGroups.forEach(group => group.classList.remove('hidden'));
-        } else {
+   // Adjusting "All Videos" category for students
+function filterVideos(category) {
+    if (category === 'all') {
+        if (currentRole === 'student') {
             categoryGroups.forEach(group => {
-                if (group.dataset.category === category) {
+                const groupCategory = group.dataset.category;
+                if (enrolledCourses.includes(groupCategory)) {
                     group.classList.remove('hidden');
                 } else {
                     group.classList.add('hidden');
                 }
             });
+        } else {
+            categoryGroups.forEach(group => group.classList.remove('hidden'));
         }
+    } else {
+        categoryGroups.forEach(group => {
+            if (group.dataset.category === category) {
+                group.classList.remove('hidden');
+            } else {
+                group.classList.add('hidden');
+            }
+        });
     }
+}
 
     categoryButtons.forEach(button => {
         button.addEventListener('click', () => {
+            const category = button.dataset.category;
+            if (currentRole === 'student' && category !== 'all' && !enrolledCourses.includes(category)) {
+                alert(`You did not enroll for the ${category} course.`);
+                return;
+            }
+
             categoryButtons.forEach(btn => btn.classList.remove('active'));
             button.classList.add('active');
-            filterVideos(button.dataset.category);
+            filterVideos(category);
         });
     });
 
@@ -83,6 +103,56 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     signInButton.addEventListener('click', () => toggleModal(signInModal, true));
+
+    signOutButton.addEventListener('click', () => {
+        currentUser = null;
+        currentRole = null;
+        signInButton.classList.remove('hidden');
+        signOutButton.classList.add('hidden');
+        uploadVideoButton.classList.add('hidden');
+        commentSection.classList.add('hidden');
+        const teacherAcronym = document.querySelector('.teacher-acronym');
+        if (teacherAcronym) teacherAcronym.remove();
+    });
+
+    // Show enrollment modal after student signs in
+    studentRoleBtn.addEventListener('click', () => {
+    const username = usernameInput.value.trim();
+    if (students.includes(username)) {
+        currentUser = username;
+        currentRole = 'student';
+        alert(`Welcome, ${username}! Please enroll in your courses.`);
+        toggleModal(signInModal, false);
+        toggleModal(enrollmentModal, true);
+    } else {
+        alert('Name not recognized. Please enter a valid student name.');
+    }});
+
+    // Confirm enrollment
+enrollConfirmButton.addEventListener('click', () => {
+    const selectedCourses = Array.from(document.querySelectorAll('#enrollmentForm input:checked')).map(input => input.value);
+    if (selectedCourses.length === 0) {
+        alert('Please select at least one course.');
+        return;
+    }
+
+    enrolledCourses = selectedCourses;
+    alert(`You have successfully enrolled in: ${enrolledCourses.join(', ')}.`);
+    toggleModal(enrollmentModal, false);
+    filterEnrolledVideos();
+});
+
+// Filter videos based on enrollment
+function filterEnrolledVideos() {
+    categoryGroups.forEach(group => {
+        const category = group.dataset.category;
+        if (enrolledCourses.includes(category)) {
+            group.classList.remove('hidden');
+        } else {
+            group.classList.add('hidden');
+        }
+    });
+}
 
     studentRoleBtn.addEventListener('click', () => {
         const username = usernameInput.value.trim();
@@ -106,6 +176,8 @@ document.addEventListener('DOMContentLoaded', () => {
         if (teachers.includes(username)) {
             currentUser = username;
             currentRole = 'teacher';
+            const acronym = username.split(' ').map(word => word[0]).join('');
+            const commentCount = Object.values(JSON.parse(localStorage.getItem('comments')) || {}).flat().length;
             alert(`Welcome, ${username}! You are signed in as a teacher.`);
             toggleModal(signInModal, false);
             signInButton.classList.add('hidden');
@@ -113,6 +185,12 @@ document.addEventListener('DOMContentLoaded', () => {
             commentSection.classList.add('hidden');
             uploadVideoButton.classList.remove('hidden');
             enableTeacherActions();
+            const headerBar = document.querySelector('.header-bar');
+            headerBar.innerHTML += `
+                <div class="teacher-acronym">
+                    ${acronym}
+                    <span id="commentCountIcon">🗨️ ${commentCount}</span>
+                </div>`;
         } else {
             alert('Name not recognized. Please enter a valid teacher name.');
         }
@@ -273,13 +351,27 @@ document.addEventListener('DOMContentLoaded', () => {
         const commentText = commentInput.value.trim();
         const videoId = commentInput.dataset.videoId;
         if (commentText) {
-            addCommentToVideo(videoId, commentText);
-            saveCommentsToStorage();
+            const comments = JSON.parse(localStorage.getItem('comments')) || {};
+            if (!comments[videoId]) {
+                comments[videoId] = [];
+            }
+            comments[videoId].push(`${currentUser}: ${commentText}`);
+            localStorage.setItem('comments', JSON.stringify(comments));
+
+            addCommentToVideo(videoId, `${currentUser}: ${commentText}`);
             commentInput.value = '';
         } else {
             alert('Please write a comment before submitting.');
         }
     });
+
+    function updateCommentCount() {
+        const commentCount = Object.values(JSON.parse(localStorage.getItem('comments')) || {}).flat().length;
+        const commentCountIcon = document.getElementById('commentCountIcon');
+        if (commentCountIcon) {
+            commentCountIcon.textContent = `🗨️ ${commentCount}`;
+        }
+    }
 
     loadVideosFromStorage();
     loadCommentsFromStorage();

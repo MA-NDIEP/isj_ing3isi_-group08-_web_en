@@ -56,17 +56,6 @@
     color: rgba(44, 62, 80, 0.6); /* Placeholder color */
 }
 
-/* User Acronym Styling */
-#userAcronym {
-    font-weight: bold;
-    font-size: 1.2em;
-    background-color: rgba(52, 152, 219, 0.8); /* Add transparency */
-    padding: 10px 15px;
-    border-radius: 50px;
-    text-align: center;
-}
-
-
 /* Body Styling */
 body {
     font-family: Arial, sans-serif;
@@ -75,6 +64,52 @@ body {
     height: 100vh;
     overflow-x: hidden;
 }
+
+.teacher-acronym {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    font-size: 25pt;
+    font-weight: bold;
+    color: #333;
+    margin-left: auto;
+}
+
+#commentCountIcon {
+    font-size: 1rem;
+    color: #007BFF; /* Use a nice blue for visibility */
+    background-color: #f0f8ff; /* Slight background color for emphasis */
+    border-radius: 50%;
+    padding: 5px 10px;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Add a hover effect for the comment count icon */
+#commentCountIcon:hover {
+    background-color: #007BFF;
+    color: #fff;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.modal {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 1000;
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.modal.hidden {
+    display: none;
+}
+
 
 /* Background Video */
 .background-video-container {
@@ -257,5 +292,18 @@ header h1 {
 
     header h1 {
         font-size: 1.5rem;
+    }
+}
+
+/* Adjustments for responsiveness */
+@media screen and (max-width: 768px) {
+    .teacher-acronym {
+        font-size: 1rem;
+        gap: 6px;
+    }
+
+    #commentCountIcon {
+        font-size: 0.9rem;
+        padding: 4px 8px;
     }
 }
