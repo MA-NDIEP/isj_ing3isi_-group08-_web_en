@@ -110,6 +110,18 @@ body {
     display: none;
 }
 
+.modal-content {
+    text-align: center;
+}
+
+.modal ul {
+    list-style: none;
+    padding: 0;
+}
+
+.modal ul li {
+    margin: 10px 0;
+}
 
 /* Background Video */
 .background-video-container {

@@ -58,6 +58,37 @@ document.addEventListener('DOMContentLoaded', () => {
         localStorage.setItem('comments', JSON.stringify(comments));
     };
 
+    const updateEnrollmentCounts = () => {
+        // Retrieve counts from local storage
+        const enrollmentCounts = JSON.parse(localStorage.getItem('enrollmentCounts')) || {};
+
+        // Reset counts
+        enrolledCourses.forEach(course => {
+            enrollmentCounts[course] = (enrollmentCounts[course] || 0) + 1;
+        });
+
+        // Save back to local storage
+        localStorage.setItem('enrollmentCounts', JSON.stringify(enrollmentCounts));
+    };
+
+    const showEnrollmentSummary = () => {
+        const enrollmentCounts = JSON.parse(localStorage.getItem('enrollmentCounts')) || {};
+        const enrollmentSummaryList = document.getElementById('enrollmentSummaryList');
+        enrollmentSummaryList.innerHTML = '';
+
+        Object.entries(enrollmentCounts).forEach(([category, count]) => {
+            const listItem = document.createElement('li');
+            listItem.textContent = `${category}: ${count} enrollment(s)`;
+            enrollmentSummaryList.appendChild(listItem);
+        });
+
+        toggleModal(document.getElementById('enrollmentSummaryModal'), true);
+    };
+
+    document.getElementById('closeSummaryButton').addEventListener('click', () => {
+        toggleModal(document.getElementById('enrollmentSummaryModal'), false);
+    });
+
    // Adjusting "All Videos" category for students
 function filterVideos(category) {
     if (category === 'all') {
@@ -129,18 +160,21 @@ function filterVideos(category) {
     }});
 
     // Confirm enrollment
-enrollConfirmButton.addEventListener('click', () => {
-    const selectedCourses = Array.from(document.querySelectorAll('#enrollmentForm input:checked')).map(input => input.value);
-    if (selectedCourses.length === 0) {
-        alert('Please select at least one course.');
-        return;
-    }
+    enrollConfirmButton.addEventListener('click', () => {
+        const selectedCourses = Array.from(document.querySelectorAll('#enrollmentForm input:checked')).map(input => input.value);
+        if (selectedCourses.length === 0) {
+            alert('Please select at least one course.');
+            return;
+        }
 
-    enrolledCourses = selectedCourses;
-    alert(`You have successfully enrolled in: ${enrolledCourses.join(', ')}.`);
-    toggleModal(enrollmentModal, false);
-    filterEnrolledVideos();
-});
+        enrolledCourses = selectedCourses;
+        alert(`You have successfully enrolled in: ${enrolledCourses.join(', ')}.`);
+        toggleModal(enrollmentModal, false);
+
+        updateEnrollmentCounts(); // Update counts here
+        filterEnrolledVideos();
+    });
+
 
 // Filter videos based on enrollment
 function filterEnrolledVideos() {
@@ -178,6 +212,7 @@ function filterEnrolledVideos() {
             currentRole = 'teacher';
             const acronym = username.split(' ').map(word => word[0]).join('');
             const commentCount = Object.values(JSON.parse(localStorage.getItem('comments')) || {}).flat().length;
+
             alert(`Welcome, ${username}! You are signed in as a teacher.`);
             toggleModal(signInModal, false);
             signInButton.classList.add('hidden');
@@ -185,16 +220,21 @@ function filterEnrolledVideos() {
             commentSection.classList.add('hidden');
             uploadVideoButton.classList.remove('hidden');
             enableTeacherActions();
+
             const headerBar = document.querySelector('.header-bar');
             headerBar.innerHTML += `
                 <div class="teacher-acronym">
                     ${acronym}
                     <span id="commentCountIcon">🗨️ ${commentCount}</span>
                 </div>`;
+
+            // Show enrollment summary automatically
+            showEnrollmentSummary();
         } else {
             alert('Name not recognized. Please enter a valid teacher name.');
         }
     });
+
 
     function enableTeacherActions() {
         const videoItems = document.querySelectorAll('.video-item');
