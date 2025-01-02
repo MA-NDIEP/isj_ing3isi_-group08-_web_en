@@ -20,6 +20,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const enrollConfirmButton = document.getElementById('enrollConfirm');
     const signInConfirm = document.getElementById('signInConfirm');
     const teacherCategoryDropdown = document.getElementById('teacherCategoryDropdown');
+    const resetEnrollmentButton = document.getElementById('resetEnrollmentButton');
     let enrolledCourses = [];
     let currentUser = null;
     let currentRole = null;
@@ -171,8 +172,8 @@ function filterVideos(category) {
            actionsDiv.remove(); // Completely remove the action buttons
        }
    });
-
-       alert('You have successfully signed out and the site has been reset.');
+   toggleResetButton(null); // Hide reset button
+   alert('You have successfully signed out.');
    });
 
     // Show enrollment modal after student signs in
@@ -228,6 +229,7 @@ function filterEnrolledVideos() {
             signOutButton.classList.remove('hidden');
             commentSection.classList.remove('hidden');
             uploadVideoButton.classList.add('hidden');
+            toggleResetButton('student'); // Hide reset button
             hideTeacherActions();
         } else {
             alert('Name not recognized. Please enter a valid student name.');
@@ -247,6 +249,7 @@ function filterEnrolledVideos() {
             signInConfirm.classList.remove('hidden');
             console.log('Dropdown visibility toggled for teacher.');
             const headerBar = document.querySelector('.header-bar');
+            toggleResetButton('teacher'); // Show reset button
             headerBar.innerHTML += `
                 <div class="teacher-acronym">
                     ${acronym}
@@ -453,11 +456,22 @@ function filterEnrolledVideos() {
             commentCountIcon.textContent = `🗨️ ${commentCount}`;
         }
     }
-    // Function to reset the enrollment counter
-function resetEnrollmentCounts() {
-    localStorage.setItem('enrollmentCounts', JSON.stringify({}));
-    alert('Enrollment counts have been reset.');
+    // Add event listener to the reset button
+resetEnrollmentButton.addEventListener('click', resetEnrollmentCounts);
+
+function toggleResetButton(role) {
+    if (role === 'teacher') {
+        resetEnrollmentButton.classList.remove('hidden');
+    } else {
+        resetEnrollmentButton.classList.add('hidden');
+    }
 }
+
+    // Function to reset the enrollment counter
+    function resetEnrollmentCounts() {
+        localStorage.removeItem('enrollmentCounts');
+        alert('Enrollment counts have been reset.');
+    }
 
 
     loadVideosFromStorage();
