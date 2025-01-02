@@ -1,0 +1,172 @@
+nav{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-top: 20px;
+    padding-left: 2%;
+    padding-right: 2%;
+}
+.navlist{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+}
+.navlist div{
+    list-style-type: none;
+    display: inline-block;
+    padding: 2px 2px;
+}
+.navlist a{
+    color: rgb(251, 247, 247);
+    padding: 5px 5px;
+    font-family: poppins;
+    margin-left: 60px;
+    font-size: 15px;
+    font-weight: 600;
+    border-bottom: 2px solid transparent;
+    transition: all .55s;
+
+}
+.navlist a:hover{
+    color: #3129c4;
+}
+.s1{
+
+    width: 100%;
+    margin: auto;
+    background:url(https://img.pikbest.com/backgrounds/20200714/book-and-pen--education-concept--abstract-designs-from-connecting-dot-and-line--vector-ill-v_1911480jpg!bw700) ;
+    height: 100vh;
+    -webkit-background-size:cover;
+    background-size: cover;
+    background-position: center center;
+    position: relative;
+
+    background-repeat: no-repeat;
+    border-radius: 20%;
+    justify-content: center;
+    align-content: center;
+}
+body{
+    width: 100%;
+    margin: auto;
+    background-color: rgb(0, 0, 0);
+    height: 100vh;
+    -webkit-background-size:cover;
+    background-size: cover;
+    background-position: center center;
+    position: relative;
+    background-repeat: no-repeat;
+}
+.btn a{
+    align-items: center;
+    padding: 5px 5px 10px 10px;
+    font-size: 15px;
+    color: #fff;
+    font-weight: bold;
+}
+.btn{
+    align-items: center;
+    padding: 20px 20px;
+
+
+
+    border: none;
+    outline: none;
+    color: #fff;
+    cursor: pointer;
+    position: relative;
+    z-index: 0;
+    border-radius: 35px;
+}
+.btn ::after{
+    content: "";
+    z-index: -1;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-color: #3c589f;
+    left: 0;
+    top: 0;
+    border-radius: 10px;
+}
+.btn ::before{
+    content: "";
+    background: linear-gradient(
+        45deg,
+        #3129c4,#c42929,#f1e9e9,#0cbfe3,
+        #7009be,#2e1091,#dbde07,#2803a0
+    );
+    position: absolute;
+    top: -2px;
+    left: -2px;
+    background-size: 600%;
+    z-index: -1;
+    width: calc(100% + 4px);
+    height:calc(100% + 4px);
+    filter: blur(8px);
+    animation: glowing 20s linear infinite;
+    transition: opacity .3s ease-in-out;
+    border-radius: 10px;
+    opacity: 1;
+}
+@keyframes glowing{
+    0% { background-position: 0 0;}
+    50% { background-position: 400% 0;}
+    100% { background-position: 0 0;}
+}
+
+.btn :hover ::before{
+    opacity: 1;
+}
+.btn :active ::after{
+    background: transparent;
+}
+.btn :active{
+    color:#3129c4;
+    font-weight: bold;
+
+}
+h1{
+    color: #f1e9e9;
+}
+h1 span{
+    color: #3129c4;
+}
+.s2{
+
+    width: 100%;
+    margin: auto;
+    background:url(https://img.lovepik.com/background/20211022/large/lovepik-premium-blue-technology-background-image_401959707.jpg) ;
+    height: 100vh;
+    -webkit-background-size:cover;
+    background-size: cover;
+    background-position: center center;
+    position: relative;
+
+    background-repeat: no-repeat;
+
+    justify-content: center;
+    align-items: center;
+    border-radius: 20%;
+}
+
+.d1{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-top: 25px;
+
+}
+.h3{
+    width: 100%;
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    padding-top: 75px;
+
+}
+p{
+    color: #fff;
+    font-size: 18px;
+}

@@ -1,0 +1,107 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+body{
+    background:rgb(4, 4, 19);
+    font-size: 15px;
+}
+.container{
+    width: 80%;
+    margin: 50PX auto;
+
+}
+.box{
+    background: #fff;
+    display: flex;
+    box-shadow: opx 25px 15px 20px rgba(31, 5, 174, 0.9);
+
+    border-radius: 30px;
+
+
+}
+.left{
+    flex-basis: 60%;
+    padding: 40px 60px;
+
+}
+.right{
+    flex-basis: 40%;
+    padding: 40px ;
+    background: blue;
+    color: #fff;
+
+}
+h1{
+    margin-bottom: 10px;
+
+}
+.container p{
+    margin-bottom: 40px;
+}
+.row{
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+.row .group{
+    flex-basis: 45%;
+
+}
+input{
+    width: 100%;
+    border: none;
+    border-bottom: 1px solid #ccc;
+    outline: none;
+    padding-bottom: 5px;
+}
+textarea{
+    width: 100%;
+    border: none;
+    border-bottom: 1px solid #ccc;
+    outline: none;
+    padding: 10px;
+    box-sizing: border-box;
+
+}
+label{
+    margin-bottom: 6px;
+    display: block;
+    color: #1c00b5;
+}
+button{
+    width: 100px;
+    border: none;
+    background: blue;
+    outline: none;
+    color: #fff;
+    height: 35px;
+    border-radius: 30px;
+    margin-top: 20px;
+    box-shadow: opx 5px 15px 0px rgba(28,0,181,0.3);
+
+}
+.left h3{
+    color: blue;
+    font-weight: 600;
+    margin-bottom: 30px;
+}
+.right h3{
+    font-weight: 600;
+    margin-bottom: 30px;
+}
+tr td:first-child{
+    padding-right: 20px;
+
+}
+tr td{
+    padding-top: 20px;
+}
+h1{
+    color: #fff9f9;
+    font-family: Arial, Helvetica, sans-serif;
+}
+.container p{
+    color:  #fff9f9;
+    font-family: Arial, Helvetica, sans-serif;
+}
