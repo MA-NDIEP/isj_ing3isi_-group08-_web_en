@@ -34,6 +34,7 @@
                 <button id="signInButton" class="sidebar-action">Sign In</button>
                 <button id="uploadVideoButton" class="sidebar-action hidden">Add Video</button>
                 <button id="signOutButton" class="hidden">Sign Out</button>
+                <button id="viewStudentCommentsButton" class="hidden">View Student <br> Comments</button>
 
             </nav>
         </aside>
@@ -156,6 +157,15 @@
                     </div>
                 </div>
 
+                <div id="allCommentsModal" class="modal hidden">
+                    <div class="modal-content">
+                        <h2>All Student Comments</h2>
+                        <ul id="allCommentsList"></ul>
+                        <button id="clearCommentsButton">Clear All Comments</button>
+                        <button id="closeAllCommentsModal" class="modal-close-btn">Close</button>
+                    </div>
+                </div>
+
                 <!-- Programming Tutorials -->
                 <div class="category-group" data-category="Algo">
                     <h2>Algo</h2>
@@ -170,5 +180,6 @@
     </div>
 
     <script src="./JS/gallery.js"></script>
+    <script src="./JS/comments.js"></script>
 </body>
 </html>

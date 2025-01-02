@@ -173,6 +173,7 @@ function filterVideos(category) {
        }
    });
    toggleResetButton(null); // Hide reset button
+   toggleViewStudentCommentsButton(null);
    alert('You have successfully signed out.');
    });
 
@@ -250,6 +251,7 @@ function filterEnrolledVideos() {
             console.log('Dropdown visibility toggled for teacher.');
             const headerBar = document.querySelector('.header-bar');
             toggleResetButton('teacher'); // Show reset button
+            toggleViewStudentCommentsButton('teacher');
             headerBar.innerHTML += `
                 <div class="teacher-acronym">
                     ${acronym}
@@ -444,18 +446,13 @@ function filterEnrolledVideos() {
 
             addCommentToVideo(videoId, `${currentUser}: ${commentText}`);
             commentInput.value = '';
+
         } else {
             alert('Please write a comment before submitting.');
         }
     });
 
-    function updateCommentCount() {
-        const commentCount = Object.values(JSON.parse(localStorage.getItem('comments')) || {}).flat().length;
-        const commentCountIcon = document.getElementById('commentCountIcon');
-        if (commentCountIcon) {
-            commentCountIcon.textContent = `🗨️ ${commentCount}`;
-        }
-    }
+
     // Add event listener to the reset button
 resetEnrollmentButton.addEventListener('click', resetEnrollmentCounts);
 
