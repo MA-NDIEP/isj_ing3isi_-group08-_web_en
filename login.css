@@ -12,8 +12,9 @@ body{
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: 50px 40px ;
+    padding: 25px 40px ;
 }
+
 .container span{
     position: absolute;
     left: 0;
@@ -34,6 +35,13 @@ body{
         background: blue;
     }
 }
+.drop{
+    display: flex;
+    color: white;
+    gap: 20px;
+
+}
+
 .d1{
     position: absolute;
     width: 400px;
@@ -97,7 +105,7 @@ h1{
 .d3{
     margin: -5px 0 15px 5px;
 }
-.d3 label{
+.d3 label, .drop label{
     color: #ffffff;
     font-size: 16px;
 }

@@ -1,3 +1,9 @@
+*{
+    padding:0%;
+    margin: 0;
+   /* box-sizing: border-box;
+    text-decoration: none;*/
+}
 nav{
     display: flex;
     align-items: center;
@@ -35,28 +41,34 @@ nav{
 
     width: 100%;
     margin: auto;
-    background:url(https://img.pikbest.com/backgrounds/20200714/book-and-pen--education-concept--abstract-designs-from-connecting-dot-and-line--vector-ill-v_1911480jpg!bw700) ;
     height: 100vh;
     -webkit-background-size:cover;
     background-size: cover;
     background-position: center center;
     position: relative;
+    background-image: url(./s1.jpeg);
 
     background-repeat: no-repeat;
     border-radius: 20%;
     justify-content: center;
     align-content: center;
+    border: none;
+    outline: none;
+    padding-left: 50px;
+
 }
 body{
-    width: 100%;
+    width: 1170px;
     margin: auto;
     background-color: rgb(0, 0, 0);
-    height: 100vh;
+    height: 100%;
     -webkit-background-size:cover;
     background-size: cover;
     background-position: center center;
     position: relative;
     background-repeat: no-repeat;
+    background-image: url(./back.2.jpg);
+
 }
 .btn a{
     align-items: center;
@@ -137,18 +149,23 @@ h1 span{
 
     width: 100%;
     margin: auto;
-    background:url(https://img.lovepik.com/background/20211022/large/lovepik-premium-blue-technology-background-image_401959707.jpg) ;
+   /* background:url(https://img.lovepik.com/background/20211022/large/lovepik-premium-blue-technology-background-image_401959707.jp) ;*/
     height: 100vh;
     -webkit-background-size:cover;
     background-size: cover;
     background-position: center center;
     position: relative;
+    background-image: url(./s2.jpg);
 
     background-repeat: no-repeat;
 
     justify-content: center;
     align-items: center;
     border-radius: 20%;
+    border: none;
+    outline: none;
+    padding-left: 50px;
+    padding-right: 50px;
 }
 
 .d1{
@@ -164,9 +181,14 @@ h1 span{
     display: flex;
     justify-content: center;
     padding-top: 75px;
+    font-size: 25px;
 
 }
 p{
     color: #fff;
     font-size: 18px;
+}
+h2{
+    color: #2a05e1;
+    font-size: 25px;
 }

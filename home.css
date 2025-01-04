@@ -11,7 +11,7 @@ body{
 
     width: 1170px;
     margin: auto;
-    background:url(https://img.freepik.com/premium-vector/online-education-e-learning-open-book-with-laptop-line-connection-low-poly-wireframe-design-abstract-geometric-background-vector-illustration_42421-1166.jpg) ;
+
     height: 100vh;
     -webkit-background-size:cover;
     background-size: cover;
@@ -19,6 +19,7 @@ body{
     position: relative;
 
     background-repeat: no-repeat;
+    background-image: url(./home.jpg);
 }
 nav{
     display: flex;
