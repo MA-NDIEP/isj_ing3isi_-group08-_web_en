@@ -11,23 +11,23 @@
         <div class="container">
         <div class="l1">
             <h2>sign-up</h2>
-            <form action="#">
+            <form action="#" id="addElementForm">
                 <div class="input">
                <div class="l2">
-                    <input type="text" required>
+                    <input type="text" required id="name" name="name">
                     <label for="">Username</label>
                 </div>
                 <div class="l2 ">
-                    <input type="email" required>
+                    <input type="email" required id="email" name="email">
                     <label for="">email</label>
                 </div>
                 <div class="l2">
-                    <input type="password" required id="password">
+                    <input type="password" required id="password"  name="password">
                     <label for="">password</label>
                     <img src="./hide.avif"  id="hide">
                 </div>
                 <div class="l2">
-                    <input type="password" required >
+                    <input type="password" required  id="confirm" name="confirm">
                     <label for="">confirm password</label>
 
                 </div>
@@ -43,12 +43,16 @@
                         }
                     }
 
+
+
+
                 </script>
             </div>
                 <div class="l3">
                     <label for=""><input type="checkbox" id="check" onclick="enable()">I agree to the terms and conditions</label>
                </div>
                <button disabled="true"  type="submit" id="l7">sign up</button>
+
                <script>
                 function enable(){
                 let check = document.getElementById("check");
@@ -120,4 +124,5 @@
         <span style="--i:48;"></span>
         <span style="--i:49;"></span>
     </div>
+    <script src="signup.js"></script>
     </body>
