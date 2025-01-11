@@ -1,0 +1,93 @@
+
+html {font-family: 'Open Sans', sans-serif;}
+/* Typography */
+p, a {font-weight: 400;}
+.h2 {font-size: 40px;}
+.h3 {font-size: 28px;}
+
+.type-space-line::after,
+.type::after {
+  content: "";
+  width: 150px;
+  display:block;
+  position: absolute;
+  border-bottom:  5px solid #6266ea;
+  padding-top: .5em;
+}
+.type::after {
+  left: 50%;
+  margin-left: -75px;
+}
+
+#index_banner {
+  background-image: url('./../img/banner-bg-01.jpg');
+  background-position: center center; background-size: cover;
+  height: 100%;
+  min-height: 60vh;
+  width: 100%;
+}
+#index_banner .slides-item {
+  min-height: 60vh;
+}
+#index_banner .slides -prev i,
+#index_banner .slides -next i {
+  color: #6266ea !important;
+  text-decoration: none;
+  font-size: 4em;
+}
+#index_banner .slides-inner {
+  height: 80vh;
+}
+#index_banner .slide li,
+#index_banner .slides-indicators.active {
+  background-color: #6266ea !important;
+}
+.section1 .section1-footer {
+  max-width: 720px;
+}
+.course.card {
+  border-radius: 10px !important;
+  cursor: pointer;
+}
+.course .show {
+	background: rgb(0,0,0);
+  background: linear-gradient(0deg, rgba(0,0,0,1) 0%, rgba(0,0,0,0) 33.33%, rgba(255,255,255,1) 66.66%, rgba(255,255,255,0) 99.99%);
+  background-size: 300% 300%;
+  background-position: 0% 100%;
+  transition: .5s;
+}
+.course .show:hover {
+  background-position: 0% 0%;
+  transition: .5s;
+}
+.course .show:hover * {
+  color: #000;
+  border-color: #000;
+  transition: .5s;
+}
+.tab.card{
+  border-radius: 10px !important;
+}
+.tab .up {
+	background: rgb(255,255,255);
+  background: linear-gradient(0deg, rgba(255,255,255,1) 0%, rgba(255,255,255,0) 33.333%, rgba(97,84,199,1) 66.666%, rgba(255,255,255,0) 99.999%);
+  background-size: 300% 300%;
+  background-position: 0% 100%;
+  transition: .5s;
+  cursor: pointer;
+}
+.tab .up:hover {
+  background-position: 0% 0%;
+  transition: .5s;
+}
+.tab .up:hover div.tab-content {
+  top: 50%;
+  margin-top: -2.5em;
+  position: absolute;
+}
+.tab .up:hover * {
+  color: white;
+  transition: .5s;
+}
+
+
