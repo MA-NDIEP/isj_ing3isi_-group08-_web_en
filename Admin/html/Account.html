@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
+    <link rel="stylesheet" href="../css/Admin.css">
+    <link rel="stylesheet" href="../css/index.css">
+    <link rel="stylesheet" href="../css/circle.css">
+    <title>Administrator</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <nav class="nav">
+        <ul>
+            <div class="profile">
+                <img src="../../image/wolf.jpeg" alt="image profile">
+                <h2>Administrator</h2>
+                <button class="p_btn">Profile</button>
+            </div>
+            <li class="bar">
+                <a href="Admin.html">
+                    <i class="fas fa-graduation-cap"></i><p>COURSES</p>
+                </a>
+            </li>
+            <li class="bar">
+                <a href="Account.html">
+                    <i class="fas fa-user"></i><p>ACCOUNTS</p>
+                </a>
+            </li>
+            <li class="bar">
+                <a href="Request.html">
+                    <i class="fas fa-question-circle"></i><p>REQUESTS</p>
+                </a>
+            </li>
+        </ul>
+    </nav>
+
+    <!--Profile dynamic alteration-->
+    <div class="container">
+        <div id="prof">
+            <h3 class="h">Profile</h3>
+            <input type="text" placeholder="User Name" required>
+            <input type="url" placeholder="image">
+            <div class="btm-btn">
+                <button class="no_btn">Cancel</button>
+                <button class="yes_btn">Save</button>
+            </div>
+        </div>
+    </div>
+
+    <section class="content">
+        <header>
+            <h1 id="header">ACCOUNTS MANAGEMENT</h1>
+        </header>
+
+        <div class="notes">
+            <div class="contain" id="cotn">
+                <div class="box">
+                    <h5>Accounts</h5>
+                    <i class="fas fa-arrow-circle-down"></i>
+                </div>
+                <button class="Add_btn">ADD</button>
+            </div>
+
+            <div class="contain" id="Course">
+                <div class="box">
+                    <h5><span>No</span> accounts</h5>
+                </div>
+                <button class="Add_btn">ADD</button>
+            </div>
+
+        </div>
+
+        <div class="circle">
+            <canvas id="myChart" width="50" height="50"></canvas>
+
+        </div>
+
+
+        <table>
+            <h1>Dashboard</h1>
+            <div>
+                <label for="filter">Filter by attribute:</label>
+                <input type="text" id="filter" placeholder="Enter attribute value">
+                <button id="applyFilter">Apply Filter</button>
+            </div>
+
+            <button id="deleteSelected">Delete Selected</button>
+                <thead>
+                    <tr>
+                        <th>Select</th>
+                        <th>Name</th>
+                        <th>Teacher</th>
+                        <th>Catalogue</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody id="elementList"></tbody>
+            </table>
+
+
+
+        <div class="container">
+            <h2>Edit</h2>
+            <div>
+                <button>Edit</button>
+                <button>Delete</button>
+            </div>
+        </div>
+
+        <div class="container">
+            <h3>Catalogue</h3>
+            <input type="text" placeholder="Enter" required>
+            <div class="btm-btn">
+                <button>Cancel</button>
+                <button>Save</button>
+            </div>
+        </div>
+
+        <!--Popup of catalogue-->
+
+
+        <!--Add Courses-->
+        <div class="container">
+            <h3>Course</h3>
+            <input type="text" placeholder="Course Name" required>
+            <input type="url" placeholder="Course" required>
+            <select name="Catalogues" id="sel-btn" >
+                <option>Computer Science</option>
+                <option>Java</option>
+            </select>
+            <div class="btm-btn">
+                <button>Cancel</button>
+                <button>Save</button>
+            </div>
+        </div>
+
+
+
+    </section>
+
+
+    <script src="../js/Acc-filter.js"></script>
+    <script src="cyclic.js"></script>
+    <script src="Account.js"></script>
+</body>
+<script src="Admin.js"></script>
+</html>

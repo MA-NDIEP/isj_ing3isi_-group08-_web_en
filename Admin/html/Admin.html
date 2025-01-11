@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
+    <link rel="stylesheet" href="../css/Admin.css">
+    <link rel="stylesheet" href="../css/index.css">
+    <link rel="stylesheet" href="../css/circle.css">
+    <link rel="stylesheet" href="../css/cat.css">
+    <title>Administrator</title>
+</head>
+<body>
+    <nav class="nav">
+        <ul>
+            <div class="profile">
+                <img src="../../image/wolf.jpeg" alt="image profile">
+                <h2>Administrator</h2>
+                <button class="p_btn">Profile</button>
+            </div>
+            <li class="bar">
+                <a href="Admin.html">
+                    <i class="fas fa-graduation-cap"></i><p>COURSES</p>
+                </a>
+            </li>
+            <li class="bar">
+                <a href="Account.html">
+                    <i class="fas fa-user"></i><p>ACCOUNTS</p>
+                </a>
+            </li>
+            <li class="bar">
+                <a href="Request.html">
+                    <i class="fas fa-question-circle"></i><p>REQUESTS</p>
+                </a>
+            </li>
+        </ul>
+    </nav>
+
+    <!--Profile dynamic alteration-->
+    <div class="container">
+        <div id="prof">
+            <h3 class="h">Profile</h3>
+            <input type="text" placeholder="User Name" required>
+            <input type="url" placeholder="image">
+            <div class="btm-btn">
+                <button class="no_btn">Cancel</button>
+                <button class="yes_btn">Save</button>
+            </div>
+        </div>
+    </div>
+
+    <section class="content">
+        <header>
+            <h1 id="header">COURSE MANAGEMENT</h1>
+        </header>
+
+        <div class="notes">
+            <div class="contain" id="cotn">
+                <div class="box">
+                    <h5>Catalogues</h5>
+                    <i class="fas fa-arrow-circle-down" onclick="showPopup()"></i>
+                </div>
+                <button class="Add_btn" onclick="addCatalogue()">ADD</button>
+            </div>
+
+            <div class="contain" id="Course">
+                <div class="box">
+                    <h5><span>No</span> Couses</h5>
+                </div>
+                <button class="Add_btn" onclick="showPopup()">ADD</button>
+            </div>
+
+        </div>
+
+        <div class="circle">
+            <canvas id="diskGraph" width="300" height="150"></canvas>
+            <div>
+                <div id="key"></div>
+            </div>
+        </div>
+
+        <table id="dashboardTable">
+
+            <thead>
+                <th colspan="5"><div  class="th">COURSE DASHBOARD</div></th>
+                <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Teacher</th>
+                    <th>Catalogue</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Rows will be added dynamically -->
+            </tbody>
+        </table>
+
+
+        <div class="container">
+            <h2>Edit</h2>
+            <div>
+                <button>Edit</button>
+                <button>Delete</button>
+            </div>
+        </div>
+
+        <div class="container1">
+            <h3>Catalogue</h3>
+            <div class="cata"></div>
+            <div class="btm-btn">
+                <button onclick="deleteSelected()">Delete</button>
+                <button onclick="closePopup()">Cancel</button>
+            </div>
+        </div>
+
+        <!--Popup of catalogue-->
+
+
+        <!--Add Courses-->
+        <div class="container">
+            <h1>Add Elements</h1>
+            <div id="popup" class="popup">
+                <h2>Add Element</h2>
+                <label for="name">Name:</label>
+                <input type="text" id="name" required>
+                <label for="teacher">Teacher:</label>
+                <input type="text" id="teacher" required>
+                <label for="catalogue">Catalogue:</label>
+                <select id="catalogue" required></select>
+                <button onclick="addElement()">Add</button>
+                <button onclick="closePopup()">Cancel</button>
+            </div>
+            <div class="btm-btn">
+                <button>Cancel</button>
+                <button>Save</button>
+            </div>
+        </div>
+
+
+
+    </section>
+
+
+
+    <script src="../js/circle.js"></script>
+    <script src="../js/index.js"></script>
+    <script src="../js/cat.js"></script>
+</body>
+<script src="../js/Admin.js"></script>
+</html>

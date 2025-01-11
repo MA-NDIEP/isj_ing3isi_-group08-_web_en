@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Enter Elements</title>
+</head>
+<body>
+    <h1>Enter Elements</h1>
+    <form id="elementForm">
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name" required><br><br>
+        <label for="teacher">Teacher:</label>
+        <input type="text" id="teacher" name="teacher" required><br><br>
+        <label for="password">Password:</label>
+        <input type="password" id="password" name="password" required><br><br>
+        <label for="catalogue">Catalogue:</label>
+        <input type="text" id="catalogue" name="catalogue" required><br><br>
+        <button type="submit">Save Element</button>
+    </form>
+
+    <script>
+        document.getElementById('elementForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+            const name = document.getElementById('name').value;
+            const teacher = document.getElementById('teacher').value;
+            const password = document.getElementById('password').value;
+            const catalogue = document.getElementById('catalogue').value;
+
+            const element = { name, teacher, password, catalogue };
+            localStorage.setItem(name, JSON.stringify(element));
+            alert('Element saved!');
+        });
+    </script>
+</body>
+</html>
