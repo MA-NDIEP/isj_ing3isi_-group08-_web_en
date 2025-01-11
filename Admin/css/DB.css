@@ -29,10 +29,8 @@ ul {
 }
 
 li {
-    background: #f4f4f4;
     margin-bottom: 10px;
     padding: 10px;
-    border: 1px solid #ccc;
 }
 
 .but.delete {

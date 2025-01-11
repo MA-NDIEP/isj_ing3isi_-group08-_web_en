@@ -304,11 +304,9 @@ section{
 }
 
 .footer{
-    display: block;
+    display: flex;
     background-color: var(--white);
     padding: 1.5rem 2rem;
-    display: flex;
-
     justify-content: center;
     border-top: var(--border);
     margin-top: 6rem;
@@ -317,6 +315,9 @@ section{
     font-size: 2rem;
     font-weight: 800 bolder;
     z-index: 1000;
+    width: 100%;
+    position: fixed;
+    bottom: 0;
 }
 
 
