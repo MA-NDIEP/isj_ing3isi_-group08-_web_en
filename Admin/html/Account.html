@@ -4,11 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
-    <link rel="stylesheet" href="Admin.css">
-    <link rel="stylesheet" href="index.css">
-    <link rel="stylesheet" href="circle.css">
-    <link rel="stylesheet" href="cat.css">
+    <link rel="stylesheet" href="../css/Admin.css">
+    <link rel="stylesheet" href="../css/index.css">
+    <link rel="stylesheet" href="../css/circle.css">
     <title>Administrator</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
     <nav class="nav">
@@ -51,43 +51,40 @@
 
     <section class="content">
         <header>
-            <h1 id="header">COURSE MANAGEMENT</h1>
+            <h1 id="header">ACCOUNTS MANAGEMENT</h1>
         </header>
 
         <div class="notes">
             <div class="contain" id="cotn">
                 <div class="box">
-                    <h5>Catalogues</h5>
-                    <i class="fas fa-arrow-circle-down" onclick="showPopup()"></i>
+                    <h5>Accounts</h5>
+                    <i class="fas fa-arrow-circle-down"></i>
                 </div>
-                <button class="Add_btn" onclick="addCatalogue()">ADD</button>
+                <button class="Add_btn">ADD</button>
             </div>
 
             <div class="contain" id="Course">
                 <div class="box">
-                    <h5><span>No</span> Couses</h5>
+                    <h5><span>No</span> accounts</h5>
                 </div>
-                <button class="Add_btn" onclick="showPopup()">ADD</button>
+                <button class="Add_btn">ADD</button>
             </div>
 
         </div>
 
         <div class="circle">
-            <canvas id="diskGraph" width="300" height="150"></canvas>
-            <div>
-                <div id="key"></div>
-            </div>
+            <canvas id="myChart" width="50" height="50"></canvas>
+
         </div>
 
         <table id="dashboardTable">
 
             <thead>
-                <th colspan="5"><div  class="th">COURSE DASHBOARD</div></th>
+                <th colspan="4"><div  class="th">ACCOUNT DASHBOARD</div></th>
                 <tr>
                     <th>ID</th>
                     <th>Name</th>
-                    <th>Teacher</th>
-                    <th>Catalogue</th>
+                    <th>Password</th>
                     <th>Actions</th>
                 </tr>
             </thead>
@@ -105,12 +102,12 @@
             </div>
         </div>
 
-        <div class="container1">
+        <div class="container">
             <h3>Catalogue</h3>
-            <div class="cata"></div>
+            <input type="text" placeholder="Enter" required>
             <div class="btm-btn">
-                <button onclick="deleteSelected()">Delete</button>
-                <button onclick="closePopup()">Cancel</button>
+                <button>Cancel</button>
+                <button>Save</button>
             </div>
         </div>
 
@@ -119,18 +116,13 @@
 
         <!--Add Courses-->
         <div class="container">
-            <h1>Add Elements</h1>
-            <div id="popup" class="popup">
-                <h2>Add Element</h2>
-                <label for="name">Name:</label>
-                <input type="text" id="name" required>
-                <label for="teacher">Teacher:</label>
-                <input type="text" id="teacher" required>
-                <label for="catalogue">Catalogue:</label>
-                <select id="catalogue" required></select>
-                <button onclick="addElement()">Add</button>
-                <button onclick="closePopup()">Cancel</button>
-            </div>
+            <h3>Course</h3>
+            <input type="text" placeholder="Course Name" required>
+            <input type="url" placeholder="Course" required>
+            <select name="Catalogues" id="sel-btn" >
+                <option>Computer Science</option>
+                <option>Java</option>
+            </select>
             <div class="btm-btn">
                 <button>Cancel</button>
                 <button>Save</button>
@@ -143,9 +135,8 @@
 
 
 
-    <script src="circle.js"></script>
-    <script src="index.js"></script>
-    <script src="cat.js"></script>
+    <script src="cyclic.js"></script>
+    <script src="Account.js"></script>
 </body>
 <script src="Admin.js"></script>
 </html>
