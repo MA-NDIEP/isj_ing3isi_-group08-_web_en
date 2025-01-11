@@ -1,76 +1,45 @@
 // script.js
 document.addEventListener('DOMContentLoaded', () => {
-    let db;
-    const request = indexedDB.open('dashboardDB', 1);
-
-    request.onupgradeneeded = (event) => {
-        db = event.target.result;
-        const objectStore = db.createObjectStore('users', { keyPath: 'id', autoIncrement: true });
-        objectStore.createIndex('name', 'name', { unique: false });
-        objectStore.createIndex('Teacher', 'Teacher', { unique: false });
-        objectStore.createIndex('Catalogue', 'Catalogue', { unique: false });
-    };
-
-    request.onsuccess = (event) => {
-        db = event.target.result;
-        displayData();
-    };
-
-    request.onerror = (event) => {
-        console.error('Database error:', event.target.errorCode);
-    };
+    displayData();
 
     document.getElementById('userForm').addEventListener('submit', (event) => {
         event.preventDefault();
         const name = document.getElementById('name').value;
         const Teacher = document.getElementById('Teacher').value;
-        const Catal = document.getElementById('Catalogue').value;
-        addUser({ name, age });
+        const Catalogue = document.getElementById('Catalogue').value;
+        addUser({ name, Teacher, Catalogue });
     });
 
     function addUser(user) {
-        const transaction = db.transaction(['users'], 'readwrite');
-        const objectStore = transaction.objectStore('users');
-        const request = objectStore.add(user);
-
-        request.onsuccess = () => {
-            displayData();
-            document.getElementById('userForm').reset();
-        };
-
-        request.onerror = (event) => {
-            console.error('Add user error:', event.target.errorCode);
-        };
+        let users = JSON.parse(localStorage.getItem('users')) || [];
+        user.id = users.length ? users[users.length - 1].id + 1 : 1;
+        users.push(user);
+        localStorage.setItem('users', JSON.stringify(users));
+        displayData();
+        document.getElementById('userForm').reset();
     }
 
     function displayData() {
-        const transaction = db.transaction(['users'], 'readonly');
-        const objectStore = transaction.objectStore('users');
-        const request = objectStore.getAll();
-
-        request.onsuccess = (event) => {
-            const users = event.target.result;
-            const tbody = document.querySelector('#dashboardTable tbody');
-            tbody.innerHTML = '';
-            users.forEach(user => {
-                const row = document.createElement('tr');
-                row.innerHTML = `
-                    <td>${user.id}</td>
-                    <td>${user.name}</td>
-                    <td>${user.Teacher}</td>
-                    <td>${user.Catalogue}</td>
-                    <td><button onclick="deleteUser(${user.id})">Delete</button></td>
-                `;
-                tbody.appendChild(row);
-            });
-        };
+        let users = JSON.parse(localStorage.getItem('users')) || [];
+        const tbody = document.querySelector('#dashboardTable tbody');
+        tbody.innerHTML = '';
+        users.forEach(user => {
+            const row = document.createElement('tr');
+            row.innerHTML = `
+                <td>${user.id}</td>
+                <td>${user.name}</td>
+                <td>${user.Teacher}</td>
+                <td>${user.Catalogue}</td>
+                <td><button onclick="deleteUser(${user.id})">Delete</button></td>
+            `;
+            tbody.appendChild(row);
+        });
     }
 
     window.deleteUser = (id) => {
-        const transaction = db.transaction(['users'], 'readwrite');
-        const objectStore = transaction.objectStore('users');
-        objectStore.delete(id).onsuccess = () => {
-            displayData();
-        };
+        let users = JSON.parse(localStorage.getItem('users')) || [];
+        users = users.filter(user => user.id !== id);
+        localStorage.setItem('users', JSON.stringify(users));
+        displayData();
     };
 });

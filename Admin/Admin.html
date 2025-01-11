@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="Admin.css">
     <link rel="stylesheet" href="index.css">
     <link rel="stylesheet" href="circle.css">
+    <link rel="stylesheet" href="cat.css">
     <title>Administrator</title>
 </head>
 <body>
@@ -57,16 +58,16 @@
             <div class="contain" id="cotn">
                 <div class="box">
                     <h5>Catalogues</h5>
-                    <i class="fas fa-arrow-circle-down"></i>
+                    <i class="fas fa-arrow-circle-down" onclick="showPopup()"></i>
                 </div>
-                <button class="Add_btn">ADD</button>
+                <button class="Add_btn" onclick="addCatalogue()">ADD</button>
             </div>
 
             <div class="contain" id="Course">
                 <div class="box">
                     <h5><span>No</span> Couses</h5>
                 </div>
-                <button class="Add_btn">ADD</button>
+                <button class="Add_btn" onclick="showPopup()">ADD</button>
             </div>
 
         </div>
@@ -104,12 +105,12 @@
             </div>
         </div>
 
-        <div class="container">
+        <div class="container1">
             <h3>Catalogue</h3>
-            <input type="text" placeholder="Enter" required>
+            <div class="cata"></div>
             <div class="btm-btn">
-                <button>Cancel</button>
-                <button>Save</button>
+                <button onclick="deleteSelected()">Delete</button>
+                <button onclick="closePopup()">Cancel</button>
             </div>
         </div>
 
@@ -118,13 +119,18 @@
 
         <!--Add Courses-->
         <div class="container">
-            <h3>Course</h3>
-            <input type="text" placeholder="Course Name" required>
-            <input type="url" placeholder="Course" required>
-            <select name="Catalogues" id="sel-btn" >
-                <option>Computer Science</option>
-                <option>Java</option>
-            </select>
+            <h1>Add Elements</h1>
+            <div id="popup" class="popup">
+                <h2>Add Element</h2>
+                <label for="name">Name:</label>
+                <input type="text" id="name" required>
+                <label for="teacher">Teacher:</label>
+                <input type="text" id="teacher" required>
+                <label for="catalogue">Catalogue:</label>
+                <select id="catalogue" required></select>
+                <button onclick="addElement()">Add</button>
+                <button onclick="closePopup()">Cancel</button>
+            </div>
             <div class="btm-btn">
                 <button>Cancel</button>
                 <button>Save</button>
@@ -139,6 +145,7 @@
 
     <script src="circle.js"></script>
     <script src="index.js"></script>
+    <script src="cat.js"></script>
 </body>
 <script src="Admin.js"></script>
 </html>

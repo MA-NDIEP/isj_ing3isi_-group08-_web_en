@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Page 1 - Enter Elements</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        form {
+            margin-bottom: 20px;
+        }
+        label, input, textarea {
+            display: block;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Enter Elements</h1>
+    <form id="entryForm">
+        <label for="topic">Topic:</label>
+        <input type="text" id="topic" name="topic" required>
+        <label for="content">Content:</label>
+        <textarea id="content" name="content" required></textarea>
+        <button type="submit">Add Element</button>
+    </form>
+    <script>
+        let db;
+        const request = indexedDB.open('myDatabase', 1);
+
+        request.onupgradeneeded = function(event) {
+            db = event.target.result;
+            const objectStore = db.createObjectStore('myStore', { keyPath: 'id', autoIncrement: true });
+            objectStore.createIndex('topic', 'topic', { unique: false });
+            objectStore.createIndex('content', 'content', { unique: false });
+        };
+
+        request.onsuccess = function(event) {
+            db = event.target.result;
+        };
+
+        request.onerror = function(event) {
+            console.error('Database error:', event.target.errorCode);
+        };
+
+        document.getElementById('entryForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+            const topic = document.getElementById('topic').value;
+            const content = document.getElementById('content').value;
+            const transaction = db.transaction(['myStore'], 'readwrite');
+            const objectStore = transaction.objectStore('myStore');
+            const request = objectStore.add({ topic: topic, content: content });
+
+            request.onsuccess = function() {
+                alert(" Request submited successfully");
+                console.log('Element added:', { topic, content });
+                document.getElementById('entryForm').reset();
+            };
+
+            request.onerror = function(event) {
+                alert(" Request unsuccessful ");
+                console.error('Error adding element:', event.target.errorCode);
+            };
+        });
+    </script>
+</body>
+</html>

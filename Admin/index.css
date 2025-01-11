@@ -20,6 +20,13 @@ th {
     text-align: left;
 }
 
+th[colspan = 5]{
+    border-top-right-radius: 10px;
+    border-top-left-radius: 10px;
+    padding: 0.5rem 2rem;
+    background-color: violet;
+}
+
 .th{
     display: flex;
     justify-content: center;

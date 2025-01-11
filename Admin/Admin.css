@@ -94,7 +94,7 @@ li a{
 
 .container{
     box-sizing: border-box;
-    position: sticky;
+    position: relative;
     margin: 0;
     padding: 0;
     border-radius: 0.5rem;
@@ -106,6 +106,34 @@ li a{
     overflow: hidden;
     transform: scale(0);
     z-index: 2000;
+}
+
+.container1{
+    box-sizing: border-box;
+    position: fixed;
+    margin: 0;
+    padding: 10px;
+    border-radius: 0.5rem;
+    box-shadow: 0px 0px 3px #1a1a19;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    transform: scale(0);
+    z-index: 4000;
+    top: 200px;
+    left: 500px;
+    animation: ease-in 0.2s ;
+}
+
+.container1.active, .container.active{
+    transform: scale(1);
+    box-shadow: 0 0 100vw #1a1a19;
+    background-color: #fff;
+    color: #1a1a19;
+
+
 }
 
 .container h3{
@@ -144,11 +172,17 @@ input{
     border-radius: 0.5rem;
 }
 
+header h1{
+    font-size: 50px;
+
+}
+
 header{
+    color: #fff;
     position: absolute;
     top: 0;
     left: 300px;
-    height: 100px;
+    height: 200px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -159,23 +193,31 @@ header{
 
 .contain{
     position: relative;
+    top: 50px;
     border: none;
     border-radius: 0.5rem;
     background-color: white;
     box-sizing: border-box;
     box-shadow: 0px 0px 3px black;
-    width: 300px;
-    height: 100px;
+    width: 200px;
+    height: 200px;
 }
 
 .box{
     background-color: var(---box-color);
     width: 100%;
+    height: 80%;
     padding: 20px;
     display: flex;
+    align-items: center;
     border-radius: 0.5rem;
-    gap: 50%;
     box-shadow: var(---shadow);
+    padding: 20px;
+    justify-content: space-around;
+}
+
+.box h5{
+    font-size: 30px;
 }
 
 .Add_btn{
@@ -195,8 +237,12 @@ header{
 }
 
 .notes{
+    position: relative;
+    top: 50px;
     display: flex;
     justify-content: space-evenly;
+    position: relative;
+    flex-wrap: wrap;
 }
 
 body{
