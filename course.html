@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Video Gallery</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="background-video-container">
+        <video autoplay muted loop id="bgVideo">
+            <source src="./Assets/Abstract beautiful geometric background with moving lines, dots and triangles. 11504453 Stock Video at Vecteezy_2.mp4" type="video/mp4">
+        </video>
+    </div>
+    <div class="layout">
+        <aside class="sidebar">
+            <h2>Categories</h2>
+            <nav id="categories">
+                <button class="category-btn active" data-category="all">All Videos</button>
+                <div class="category-section">
+                    <h3>Courses</h3>
+                    <button class="category-btn" data-category="Java">Java</button>
+                    <button class="category-btn" data-category="Algo">Algo</button>
+                    <button class="category-btn" data-category="Python">Python</button>
+                </div>
+                <button id="signInButton" class="sidebar-action">Sign In</button>
+                <button id="uploadVideoButton" class="sidebar-action hidden">Add Video</button>
+                <button id="signOutButton" class="hidden">Sign Out</button>
+                <button id="viewStudentCommentsButton" class="hidden">View Student <br> Comments</button>
+
+            </nav>
+        </aside>
+
+        <main class="main-content">
+            <header>
+                <div class="header-bar">
+                    <input type="text" id="searchBar" placeholder="Search videos..." />
+                    <div id="userIcon" class="user-icon">
+                        <i class="fas fa-user-circle"></i>
+                    </div>
+                </div>
+                <!-- User Comments Modal -->
+                 <div id="userCommentsModal" class="modal hidden">
+                    <div class="modal-content">
+                        <h2>Your Comments</h2>
+                        <ul id="userCommentsList"></ul>
+                        <button id="closeUserCommentsModal" class="modal-close-btn">Close</button>
+                    </div>
+                </div>
+
+                <!-- Modal for Sign-In -->
+                <div id="signInModal" class="modal hidden">
+                    <div class="modal-content">
+                        <h2>Sign In</h2>
+                        <input type="text" id="username" placeholder="Enter username">
+                        <div>
+                            <button id="studentRoleBtn">Sign In as Student</button>
+                            <button id="teacherRoleBtn">Sign In as Teacher</button>
+                        </div>
+                        <div id="teacherCategoryDropdown" class="hidden">
+                            <label for="teacherCategory">Select Your Category:</label>
+                            <select id="teacherCategory">
+                                <option value="">--Select--</option>
+                                <option value="python">Python</option>
+                                <option value="algo">Algorithms</option>
+                                <option value="java">Java</option>
+                            </select>
+                        </div>
+                        <button id="signInConfirm" class="hidden">Confirm Sign In</button>
+                    </div>
+                </div>
+
+                <!-- Enrollment Summary Modal (Visible for Teachers) -->
+                 <div id="enrollmentSummaryModal" class="modal hidden">
+                    <div class="modal-content">
+                        <h2>Enrollment Summary</h2>
+                        <ul id="enrollmentSummaryList"></ul>
+                        <button id="closeSummaryButton">Close</button>
+                    </div></div>
+
+                    <!-- User Comments Modal -->
+<div id="userCommentsModal" class="modal hidden">
+    <div class="modal-content">
+        <h2>Your Comments</h2>
+        <ul id="userCommentsList"></ul>
+        <button id="closeUserCommentsModal" class="modal-close-btn">Close</button>
+    </div>
+</div>
+
+
+                <!-- Course Enrollment Modal -->
+                 <div id="enrollmentModal" class="modal hidden">
+                    <div class="modal-content">
+                        <h2>Enroll in Courses</h2>
+                        <form id="enrollmentForm">
+                            <label><input type="checkbox" value="Java"> Java</label><br>
+                            <label><input type="checkbox" value="Python"> Python</label><br>
+                            <label><input type="checkbox" value="Algo"> Algo</label><br>
+                        </form>
+                        <button id="enrollConfirm">Confirm Enrollment</button>
+                    </div>
+                </div>
+
+    <!-- Modal for Upload -->
+    <div id="uploadModal" class="modal hidden">
+        <div class="modal-content">
+            <h2>Upload a Video</h2>
+            <input type="text" id="videoIdInput" placeholder="YouTube Video ID or Link">
+            <select id="videoCategoryInput">
+                <option value="Java">Java</option>
+                <option value="Python">Python</option>
+                <option value="Algo">Algo</option>
+            </select>
+            <button id="uploadConfirm">Add Video</button>
+        </div>
+    </div>
+                <button id="uploadVideoButton" class="hidden">Add Video</button>
+                <h1>Course Outline</h1>
+            </header>
+
+           <!-- Comment Section (Visible for Students) -->
+             <div id="commentSection" class="hidden">
+                 <textarea id="commentInput" placeholder="Write a comment..."></textarea>
+                 <button id="submitCommentBtn">Submit Comment</button>
+                 <div id="commentsList"></div>
+             </div>
+
+            <div id="video-gallery">
+                <!-- Java Category -->
+                <div class="category-group" data-category="Java">
+                    <h2>Java Courses</h2>
+                    <div class="video-grid">
+
+                    </div>
+                </div>
+
+                <!-- Python Category -->
+                <div class="category-group" data-category="Python">
+                    <h2>Python Courses</h2>
+                    <div class="video-grid">
+
+                    </div>
+                </div>
+
+                <div id="allCommentsModal" class="modal hidden">
+                    <div class="modal-content">
+                        <h2>All Student Comments</h2>
+                        <ul id="allCommentsList"></ul>
+                        <button id="clearCommentsButton">Clear All Comments</button>
+                        <button id="closeAllCommentsModal" class="modal-close-btn">Close</button>
+                    </div>
+                </div>
+                <button id="resetEnrollmentButton" class="hidden">Reset Enrollment Counts</button>
+            </div>
+        </main>
+
+    </div>
+
+    <script src="./JS/gallery.js"></script>
+    <script src="./JS/comments.js"></script>
+</body>
+</html>
