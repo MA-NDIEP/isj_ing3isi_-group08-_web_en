@@ -31,42 +31,14 @@
                     <label for="">confirm password</label>
 
                 </div>
-                <script>
-                    let eyeicon = document.getElementById("hide");
-                    let password = document.getElementById("password");
 
-                    eyeicon.onclick = function(){
-                        if(password.type == "password"){
-                            password.type = "text"
-                        }else{
-                            password.type = "password"
-                        }
-                    }
-
-
-
-
-                </script>
             </div>
                 <div class="l3">
                     <label for=""><input type="checkbox" id="check" onclick="enable()">I agree to the terms and conditions</label>
                </div>
                <button disabled="true"  type="submit" id="l7">sign up</button>
 
-               <script>
-                function enable(){
-                let check = document.getElementById("check");
-                let l7 = document.getElementById("l7");
 
-                if(check.checked){
-                    l7.removeAttribute("disabled");
-                } else {
-                    l7.disabled = "true";
-                }
-                }
-
-
-               </script>
                <div class="l4">
                    <p>Already have an account sign in? <a href="./Login.html">sign in</a></p>
                </div>
@@ -124,5 +96,36 @@
         <span style="--i:48;"></span>
         <span style="--i:49;"></span>
     </div>
+    <script>
+        let eyeicon = document.getElementById("hide");
+        let password = document.getElementById("password");
+
+        eyeicon.onclick = function(){
+            if(password.type == "password"){
+                password.type = "text"
+            }else{
+                password.type = "password"
+            }
+        }
+
+
+
+
+    </script>
+
+<script>
+    function enable(){
+    let check = document.getElementById("check");
+    let l7 = document.getElementById("l7");
+
+    if(check.checked){
+        l7.removeAttribute("disabled");
+    } else {
+        l7.disabled = "true";
+    }
+    }
+
+
+   </script>
     <script src="signup.js"></script>
     </body>

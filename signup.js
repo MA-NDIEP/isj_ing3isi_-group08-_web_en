@@ -1,41 +1,20 @@
-let db;
-const request = indexedDB.open('myDatabase', 1);
+document.getElementById("addElementForm").addEventListener("submit", function(event){
+    event.preventDefault();
+    var username = document.getElementById("name").value;
+    var password = document.getElementById("password").value;
+    var confirm = document.getElementById("confirm").value;
+    var email = document.getElementById("email").value;
 
-request.onupgradeneeded = function(event) {
-    const db = event.target.result;
-    const store = db.createObjectStore('myStore', { keyPath: 'id', autoIncrement: true });
-    store.createIndex('email', 'email', { unique: false });
-    store.createIndex('name', 'name', { unique: false });
-    store.createIndex('password', 'password', { unique: false });
-    store.createIndex('confirm', 'confirm', { unique: false });
-};
-
-        request.onsuccess = function(event) {
-            db = event.target.result;
-        };
-
-        request.onerror = function(event) {
-            console.error('Database error:', event.target.errorCode);
-        };
-
-        document.getElementById('addElementForm').onsubmit = function(event) {
-            event.preventDefault();
-            const email = document.getElementById('email').value;
-            const name = document.getElementById('name').value;
-            const password = document.getElementById('password').value;
-            const confirm = document.getElementById('confirm').value;
-            addElement({ email, name, password, confirm });
-        };
-
-        function addElement(element) {
-
-            const transaction = db.transaction(['myStore'], 'readwrite');
-            alert('jdfkfvkl');
-            const store = transaction.objectStore('myStore');
-
-            store.add(element);
-            transaction.oncomplete = function() {
-                alert('Element added successfully!');
-                document.getElementById('addElementForm').reset();
-            };
-        }
+    if(password !== confirm){
+        alert("passwords donot match");
+        return;
+    }
+    const user = {
+        username: username,
+        password: password,
+        email: email
+    };
+    localStorage.setItem(username, JSON.stringify(user));
+    alert("sign up successful, please login")
+    window.location.href = "./Login.html";
+});
