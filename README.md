@@ -3,4 +3,4 @@ Theme 5: Developing a web platform that allows teachers to offer courses in vide
 Group members:
 AYUK NJIEASSAM MA-NDIEP
 ESSINDI ESSINDI YVAN STEPHANE
-TAKAM 
+TAKAM SOKOUDJO ISMAEL ULRICH
