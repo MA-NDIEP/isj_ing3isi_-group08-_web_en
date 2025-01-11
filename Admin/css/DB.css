@@ -17,7 +17,7 @@ input, textarea {
     font-size: 16px;
 }
 
-button {
+.but {
     padding: 10px 20px;
     font-size: 16px;
     cursor: pointer;
@@ -35,7 +35,7 @@ li {
     border: 1px solid #ccc;
 }
 
-button.delete {
+.but.delete {
     background: red;
     color: white;
     border: none;
@@ -45,5 +45,5 @@ button.delete {
 
 .what{
     position: relative;
-    top: 150px;
+    top: 250px;
 }

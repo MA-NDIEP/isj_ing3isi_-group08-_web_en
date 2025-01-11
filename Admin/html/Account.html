@@ -14,7 +14,7 @@
     <nav class="nav">
         <ul>
             <div class="profile">
-                <img src="../image/wolf.jpeg" alt="image profile">
+                <img src="../../image/wolf.jpeg" alt="image profile">
                 <h2>Administrator</h2>
                 <button class="p_btn">Profile</button>
             </div>
@@ -77,21 +77,28 @@
 
         </div>
 
-        <table id="dashboardTable">
 
-            <thead>
-                <th colspan="4"><div  class="th">ACCOUNT DASHBOARD</div></th>
-                <tr>
-                    <th>ID</th>
-                    <th>Name</th>
-                    <th>Password</th>
-                    <th>Actions</th>
-                </tr>
-            </thead>
-            <tbody>
-                <!-- Rows will be added dynamically -->
-            </tbody>
-        </table>
+        <table>
+            <h1>Dashboard</h1>
+            <div>
+                <label for="filter">Filter by attribute:</label>
+                <input type="text" id="filter" placeholder="Enter attribute value">
+                <button id="applyFilter">Apply Filter</button>
+            </div>
+
+            <button id="deleteSelected">Delete Selected</button>
+                <thead>
+                    <tr>
+                        <th>Select</th>
+                        <th>Name</th>
+                        <th>Teacher</th>
+                        <th>Catalogue</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody id="elementList"></tbody>
+            </table>
+
 
 
         <div class="container">
@@ -134,7 +141,7 @@
     </section>
 
 
-
+    <script src="../js/Acc-filter.js"></script>
     <script src="cyclic.js"></script>
     <script src="Account.js"></script>
 </body>
