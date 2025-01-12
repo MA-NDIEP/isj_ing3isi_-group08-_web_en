@@ -7,8 +7,8 @@
 /* line 1, src/assets/scss/_root.scss */
 :root {
   --bs-blue: #0d6efd;
-  --bs-indigo: #6610f2;
-  --bs-purple: #4232c2;
+  --bs-indigo: #180296;
+  --bs-purple: #180a85;
   --bs-pink: #d63384;
   --bs-red: #dc3545;
   --bs-orange: #fd7e14;
@@ -19,7 +19,7 @@
   --bs-white: #fff;
   --bs-gray: #6c757d;
   --bs-gray-dark: #343a40;
-  --bs-primary: #4232c2;
+  --bs-primary: #1e0f93;
   --bs-secondary: #6266ea;
   --bs-success: #198754;
   --bs-info: #0dcaf0;
@@ -3028,7 +3028,7 @@ textarea.form -lg {
 /* line 50, src/assets/scss/forms/_form-check.scss */
 .form-check-input:checked {
   background-color: #4232c2;
-  border-color: #4232c2;
+  border-color: #1c0b9a;
 }
 
 /* line 54, src/assets/scss/forms/_form-check.scss */
@@ -3144,7 +3144,7 @@ textarea.form -lg {
   width: 1rem;
   height: 1rem;
   margin-top: -0.25rem;
-  background-color: #4232c2;
+  background-color: #1e0e96;
   border: 0;
   border-radius: 1rem;
   -webkit-transition: background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, -webkit-box-shadow 0.15s ease-in-out;
@@ -3183,7 +3183,7 @@ textarea.form -lg {
 .form-range::-moz-range-thumb {
   width: 1rem;
   height: 1rem;
-  background-color: #4232c2;
+  background-color: #180a82;
   border: 0;
   border-radius: 1rem;
   -moz-transition: background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
