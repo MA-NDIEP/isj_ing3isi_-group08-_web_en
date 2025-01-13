@@ -11,7 +11,7 @@ p, a {font-weight: 400;}
   width: 150px;
   display:block;
   position: absolute;
-  border-bottom:  5px solid #6266ea;
+  border-bottom:  5px solid #040872;
   padding-top: .5em;
 }
 .type::after {
@@ -31,7 +31,7 @@ p, a {font-weight: 400;}
 }
 #index_banner .slides -prev i,
 #index_banner .slides -next i {
-  color: #6266ea !important;
+  color: #05096e !important;
   text-decoration: none;
   font-size: 4em;
 }
@@ -40,7 +40,7 @@ p, a {font-weight: 400;}
 }
 #index_banner .slide li,
 #index_banner .slides-indicators.active {
-  background-color: #6266ea !important;
+  background-color: #04087f !important;
 }
 .section1 .section1-footer {
   max-width: 720px;
@@ -69,8 +69,8 @@ p, a {font-weight: 400;}
   border-radius: 10px !important;
 }
 .tab .up {
-	background: rgb(255,255,255);
-  background: linear-gradient(0deg, rgba(255,255,255,1) 0%, rgba(255,255,255,0) 33.333%, rgba(97,84,199,1) 66.666%, rgba(255,255,255,0) 99.999%);
+	background: rgb(255, 255, 255);
+  background: linear-gradient(0deg, rgba(255,255,255,1) 0%, rgba(255,255,255,0) 33.333%, rgb(0, 0, 0) 66.666%, rgba(255,255,255,0) 99.999%);
   background-size: 300% 300%;
   background-position: 0% 100%;
   transition: .5s;
