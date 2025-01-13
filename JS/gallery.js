@@ -474,3 +474,39 @@ function toggleResetButton(role) {
     loadVideosFromStorage();
     loadCommentsFromStorage();
 });
+document.addEventListener('DOMContentLoaded', () => {
+    const searchBar = document.getElementById('searchBar');
+
+    searchBar.addEventListener('input', () => {
+        const query = searchBar.value.trim().toLowerCase();
+        filterCatalogs(query);
+    });
+
+    function filterCatalogs(query) {
+        const categoryGroups = document.querySelectorAll('.category-group');
+        categoryGroups.forEach(group => {
+            const category = group.dataset.category.toLowerCase();
+            const videos = group.querySelectorAll('.video-item');
+            let hasVisibleVideo = false;
+
+            // Filter videos within the category
+            videos.forEach(video => {
+                const videoName = video.querySelector('h3').textContent.toLowerCase();
+                if (videoName.includes(query) || category.includes(query)) {
+                    video.classList.remove('hidden');
+                    hasVisibleVideo = true;
+                } else {
+                    video.classList.add('hidden');
+                }
+            });
+
+            // Show or hide the category based on whether it has visible videos
+            if (hasVisibleVideo || category.includes(query)) {
+                group.classList.remove('hidden');
+            } else {
+                group.classList.add('hidden');
+            }
+        });
+    }
+});
+
