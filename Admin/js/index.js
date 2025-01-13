@@ -7,20 +7,20 @@ document.addEventListener('DOMContentLoaded', () => {
         const name = document.getElementById('name').value;
         const Teacher = document.getElementById('Teacher').value;
         const Catalogue = document.getElementById('Catalogue').value;
-        addUser({ name, Teacher, Catalogue });
+        addUser({ name, Catalogue });
     });
 
     function addUser(user) {
-        let users = JSON.parse(localStorage.getItem('users')) || [];
+        let users = JSON.parse(localStorage.getItem('videos')) || [];
         user.id = users.length ? users[users.length - 1].id + 1 : 1;
         users.push(user);
-        localStorage.setItem('users', JSON.stringify(users));
+        localStorage.setItem('videos', JSON.stringify(users));
         displayData();
         document.getElementById('userForm').reset();
     }
 
     function displayData() {
-        let users = JSON.parse(localStorage.getItem('users')) || [];
+        let users = JSON.parse(localStorage.getItem('videos')) || [];
         const tbody = document.querySelector('#dashboardTable tbody');
         tbody.innerHTML = '';
         users.forEach(user => {
@@ -37,9 +37,9 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     window.deleteUser = (id) => {
-        let users = JSON.parse(localStorage.getItem('users')) || [];
+        let users = JSON.parse(localStorage.getItem('videos')) || [];
         users = users.filter(user => user.id !== id);
-        localStorage.setItem('users', JSON.stringify(users));
+        localStorage.setItem('videos', JSON.stringify(users));
         displayData();
     };
 });

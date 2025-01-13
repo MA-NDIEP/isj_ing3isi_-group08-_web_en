@@ -8,6 +8,14 @@
     <link rel="stylesheet" href="../css/index.css">
     <!--link rel="stylesheet" href="../../Documents/Setup/bootstrap-5.3.3-dist/bootstrap-5.3.3-dist/css/bootstrap.min.css"-->
     <title>Document</title>
+
+    <style>
+        .big { padding: 10px 20px;
+            color: blue;
+            background-color: #fff;}
+        .popup { display: none; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); background: white; padding: 20px; border: 1px solid #ccc; }
+        .popup.active { display: block; }
+    </style>
 </head>
 <body>
 
@@ -50,12 +58,29 @@
                     <a href="profile.html " class="btn">View Profile</a>
                 </div>
 
-            <li class="home"><i class="fas fa-home"></i><span>Home</span></li>
-            <li class="course"><i class="fas fa-graduation-cap"></i><span>Course</span></li>
-            <li class="req"><i class="fas fa-question-circle"></i><span>Request</span></li>
+            <li class="home" onclick="home()"><i class="fas fa-home"></i><span>Home</span></li>
+            <li class="course" onclick="begin()"><i class="fas fa-graduation-cap"></i><span>Course</span></li>
+            <li class="req" onclick="req()"><i class="fas fa-question-circle"></i><span>Request</span></li>
 
         </ul>
     </nav>
+
+    <h1>Add Elements</h1>
+    <button class="big" onclick="showPopup()">Add Element</button>
+    <div id="popup" class="popup">
+        <h2>Add Element</h2>
+        <label for="name">Name:</label>
+        <input type="text" id="name" required>
+        <label for="teacher">Teacher:</label>
+        <input type="text" id="teacher" required>
+        <label for="catalogue">Catalogue:</label>
+        <select id="catalogue" required></select>
+        <button class="big" onclick="addElement()">Add</button>
+        <button class="big" onclick="closePopup()">Cancel</button>
+    </div>
+    <script src="../../Admin/js/cat.js"></script>
+
+
 <div class="table">
     <table id="dashboardTable">
 
@@ -78,6 +103,7 @@
     <footer class="footer">
         &copy; Copyright@2024 by <span>Group 2 Web Development</span>| All rights reserved by IUSJ
     </footer>
+    <script src="../js/navbar.js"></script>
     <script src="../../Admin/js/index.js"></script>
     <script src="../js/work.js"></script>
 </body>
