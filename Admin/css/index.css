@@ -27,8 +27,3 @@ th[colspan = 5]{
     background-color: violet;
 }
 
-.th{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}

@@ -3,11 +3,11 @@ document.addEventListener('DOMContentLoaded', () => {
     populateCatalogueDropdown();
 
     function showPopup() {
-        document.querySelector('.container').classList.add('active');
+        document.querySelector('.popup').classList.add('active');
     }
 
     function closePopup() {
-        document.querySelector('.container').classList.remove('active');
+        document.querySelector('.popup').classList.remove('active');
     }
 
     window.showPopup = showPopup;

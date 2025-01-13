@@ -29,12 +29,34 @@ document.addEventListener('DOMContentLoaded', () => {
                 <td>${user.id}</td>
                 <td>${user.name}</td>
                 <td>${user.Teacher}</td>
-                <td>${user.Catalogue}</td>
                 <td><button onclick="deleteUser(${user.id})">Delete</button></td>
             `;
             tbody.appendChild(row);
         });
     }
+
+    function displayElements(filter = '') {
+        const elementList = document.getElementById('elementList');
+        elementList.innerHTML = '';
+        for (let i = 0; i < localStorage.length; i++) {
+            const key = localStorage.key(i);
+            const element = JSON.parse(localStorage.getItem(key));
+            if (filter && !Object.values(element).some(value => value.includes(filter))) {
+                continue;
+            }
+            const tr = document.createElement('tr');
+            tr.innerHTML = `
+                <td>${user.id}</td>
+                <td>${element.name}</td>
+                <td>${element.teacher}</td>
+                <td>${element.catalogue}</td>
+                <td><button onclick="deleteUser(${user.id})">Delete</button></td>
+
+            `;
+            elementList.appendChild(tr);
+        }
+    }
+
 
     window.deleteUser = (id) => {
         let users = JSON.parse(localStorage.getItem('videos')) || [];
