@@ -1,6 +1,6 @@
 document.addEventListener('DOMContentLoaded', () => {
-    const students = ['Ramzy', 'Jane Smith', 'Alice Johnson'];
-    const teachers = ['Mr. Adams', 'Ms. Brown', 'steph'];
+    const students = ['Ramzy', 'ayuk', 'takam'];
+    const teachers = ['Dr Naha', 'Dr Kacfack', 'Mr Kougang'];
 
     const categoryButtons = document.querySelectorAll('.category-btn');
     const categoryGroups = document.querySelectorAll('.category-group');
