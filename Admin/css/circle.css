@@ -1,6 +1,6 @@
 .circle{
     display: flex;
-    justify-content: space-evenly;
+    justify-content: center;
     gap: 5px;
     border-radius: 0.5rem;
     box-sizing: border-box;
@@ -11,5 +11,6 @@
     margin-right: 20%;
     margin-left: 20%;
     position: relative;
-    top: 80px;
+    top: 250px;
+    width: calc(100% - 35%);
 }
