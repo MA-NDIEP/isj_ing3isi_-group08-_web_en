@@ -3,13 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Page 1 - Enter Elements</title>
+    <title>Request</title>
     <style>
         body {
             font-family: Arial, sans-serif;
             margin: 20px;
         }
         form {
+            box-sizing: border-box;
+            box-shadow: 0 0 4px black;
+            padding: 20px;
+            border-radius: 10px;
+            position: relative;
+            top: 30px;
+            left: 30px;
             margin-bottom: 20px;
         }
         label, input, textarea {
@@ -23,10 +30,10 @@
     <div class="form">
         <form id="elementForm">
             <input type="text" id="name" placeholder="Name" required>
-            <input type="password" id="password" placeholder="Password" required>
-            <input type="text" id="attribute1" placeholder="Attribute 1" required>
-            <input type="text" id="attribute2" placeholder="Attribute 2" required>
-            <input type="text" id="attribute3" placeholder="Attribute 3" required>
+            <input type="password" id="password" placeholder="topic" required>
+            <input type="text" id="attribute1" placeholder="Sender" required>
+            <input type="text" id="attribute2" placeholder="main point" required>
+            <textarea id="attribute3" placeholder="Request containt" required></textarea>
             <button type="submit">Submit</button>
         </form>
 
