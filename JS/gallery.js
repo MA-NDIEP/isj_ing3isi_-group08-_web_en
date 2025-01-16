@@ -1,5 +1,4 @@
 document.addEventListener('DOMContentLoaded', () => {
-    const students = ['Ramzy', 'ayuk', 'takam'];
     const teachers = ['Dr Naha', 'Dr Kacfack', 'Mr Kougang'];
 
     const categoryButtons = document.querySelectorAll('.category-btn');
@@ -25,6 +24,26 @@ document.addEventListener('DOMContentLoaded', () => {
     let currentUser = null;
     let currentRole = null;
     let teacherCategory = null;
+    let students = []; // Dynamic students array
+
+     // Fetch student names dynamically from localStorage
+     function loadStudentNamesFromLocalStorage() {
+        try {
+            // Assume localStorage key is "studentData"
+            const storedData = localStorage.getItem('studentData');
+            if (storedData) {
+                const parsedData = JSON.parse(storedData);
+                students = parsedData.map(item => item.key); // Extract 'key' column values
+                console.log('Student names loaded from localStorage:', students);
+            } else {
+                console.warn('No student data found in localStorage.');
+            }
+        } catch (error) {
+            console.error('Error loading student data from localStorage:', error);
+        }
+    }
+       // Call the function to load student names
+       loadStudentNamesFromLocalStorage();
 
     const loadVideosFromStorage = () => {
         const storedVideos = JSON.parse(localStorage.getItem('videos')) || [];
