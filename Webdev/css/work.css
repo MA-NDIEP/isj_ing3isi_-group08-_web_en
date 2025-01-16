@@ -12,7 +12,7 @@
 }
 
 :root{
-    --main-color: #8e44ad;
+    --main-color: #1326d1;
     --red: #e74c3c;
     --orange:#f39c12;
     --white:#fff;
@@ -427,4 +427,18 @@ header{
         font-size: 50%;
     }
 
+}
+.big{
+    background: #3498db;
+    color: white;
+    border-radius: 10px;
+}
+#bb{
+    background: #3498db;
+    color: white;
+    border-radius: 10px;
+
+}
+#bb a{
+    color: #fff;
 }
