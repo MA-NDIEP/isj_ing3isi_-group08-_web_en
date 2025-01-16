@@ -1,3 +1,12 @@
+document.querySelector('#Add-btn2').addEventListener('click', function() {
+    document.querySelector('.container').classList.toggle('active');
+});
+
+document.querySelector('.no-btn').addEventListener('click', function() {
+    document.querySelector('.container').classList.remove('active');
+});
+
+
 function displayElements(filter = '') {
     const elementList = document.getElementById('elementList');
     elementList.innerHTML = '';
@@ -50,9 +59,6 @@ window.onload = function() {
     displayElements();
 };
 
-function add(){
-    document.querySelector('.contaner').classList.toggle('acitve');
-}
 
 document.getElementById('elementForm').addEventListener('submit', function(event) {
     event.preventDefault();
