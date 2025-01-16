@@ -6,7 +6,7 @@ body {
 table {
     position: relative;
     top: 50px;
-    width: 100%;
+    width: calc(100% - 300px);
     border-collapse: collapse;
 }
 
@@ -27,12 +27,4 @@ th[colspan = 5]{
     background-color: violet;
 }
 
-th{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
 
-.table{
-    width: 6rem;
-}

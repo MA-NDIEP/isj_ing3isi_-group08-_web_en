@@ -1,9 +1,18 @@
+document.querySelector('#Add-btn2').addEventListener('click', function() {
+    document.querySelector('.container').classList.toggle('active');
+});
+
+document.querySelector('.no-btn').addEventListener('click', function() {
+    document.querySelector('.container').classList.remove('active');
+});
+
+
 function displayElements(filter = '') {
     const elementList = document.getElementById('elementList');
     elementList.innerHTML = '';
     for (let i = 0; i < localStorage.length; i++) {
         const key = localStorage.key(i);
-        const element = JSON.parse(localStorage.getItem(key));
+        const element = JSON.parse(localStorage.getItem('ulrich'));
         if (filter && !Object.values(element).some(value => value.includes(filter))) {
             continue;
         }
@@ -33,9 +42,9 @@ document.addEventListener('click', function(event) {
         const key = event.target.getAttribute('data-key');
         const newPassword = prompt('Enter new password:');
         if (newPassword) {
-            const element = JSON.parse(localStorage.getItem(key));
+            const element = JSON.parse(localStorage.getItem('ulrich'));
             element.password = newPassword;
-            localStorage.setItem(key, JSON.stringify(element));
+            localStorage.setItem('ulrich', JSON.stringify(element));
             alert('Password reset!');
         }
     }
@@ -49,3 +58,19 @@ document.getElementById('applyFilter').addEventListener('click', function() {
 window.onload = function() {
     displayElements();
 };
+
+
+document.getElementById('elementForm').addEventListener('submit', function(event) {
+    event.preventDefault();
+    const name = document.getElementById('name').value;
+    const teacher = document.getElementById('teacher').value;
+    const password = document.getElementById('password').value;
+    const catalogue = document.getElementById('catalogue').value;
+
+    const element = { name, teacher, password, catalogue };
+    localStorage.setItem('ulrich', JSON.stringify(element));
+    alert('Element saved!');
+    displayElements();
+});
+
+

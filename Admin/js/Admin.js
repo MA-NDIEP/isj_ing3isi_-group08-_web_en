@@ -11,7 +11,8 @@ function addCatalogue() {
 }
 
 function showPopup() {
-    const popup = document.querySelector('.container1');
+    const popup = document.querySelector('.container');
+    popup.classList.add('active');
     const catalogueList = document.querySelector('.cata');
     catalogueList.innerHTML = '';
     let catalogues = JSON.parse(localStorage.getItem('catalogues')) || [];
@@ -20,7 +21,6 @@ function showPopup() {
         div.innerHTML = `<input type="checkbox" id="catalogue-${index}" value="${catalogue}"> <label for="catalogue-${index}">${catalogue}</label>`;
         catalogueList.appendChild(div);
     });
-    popup.classList.add('active');
 }
 
 function closePopup() {

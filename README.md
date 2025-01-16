@@ -4,3 +4,4 @@ Group members:
 AYUK NJIEASSAM MA-NDIEP
 ESSINDI ESSINDI YVAN STEPHANE
 TAKAM SOKOUDJO ISMAEL ULRICH
+NB: the website starts from the home.html

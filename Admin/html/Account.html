@@ -31,7 +31,7 @@
     </nav>
 
     <!--Profile dynamic alteration-->
-    <div class="container">
+    <!--div class="container1">
         <div id="prof">
             <h3 class="h">Profile</h3>
             <input type="text" placeholder="User Name" required>
@@ -41,7 +41,7 @@
                 <button class="yes_btn">Save</button>
             </div>
         </div>
-    </div>
+    </div-->
 
     <section class="content">
         <header>
@@ -54,14 +54,14 @@
                     <h5>Accounts</h5>
                     <i class="fas fa-arrow-circle-down"></i>
                 </div>
-                <button class="Add_btn">ADD</button>
+                <button class="Add_btn" id="Add-btn2">ADD</button>
             </div>
 
             <div class="contain" id="Course">
                 <div class="box">
                     <h5><span>No</span> accounts</h5>
                 </div>
-                <button class="Add_btn">ADD</button>
+                <button class="Add_btn"  onclick="showPopup()">ADD</button>
             </div>
 
         </div>
@@ -95,7 +95,7 @@
 
 
 
-        <div class="container">
+        <!--div class="container1">
             <h2>Edit</h2>
             <div>
                 <button>Edit</button>
@@ -103,31 +103,38 @@
             </div>
         </div>
 
-        <div class="container">
+        <div class="container1">
             <h3>Catalogue</h3>
             <input type="text" placeholder="Enter" required>
             <div class="btm-btn">
                 <button>Cancel</button>
                 <button>Save</button>
             </div>
-        </div>
+        </div-->
 
         <!--Popup of catalogue-->
 
 
         <!--Add Courses-->
         <div class="container">
-            <h3>Course</h3>
-            <input type="text" placeholder="Course Name" required>
-            <input type="url" placeholder="Course" required>
-            <select name="Catalogues" id="sel-btn" >
-                <option>Computer Science</option>
-                <option>Java</option>
-            </select>
-            <div class="btm-btn">
-                <button>Cancel</button>
-                <button>Save</button>
-            </div>
+            <h1>Enter Elements</h1>
+    <form id="elementForm">
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name" required><br><br>
+        <label for="teacher">Status:</label>
+        <select id="teacher" required>
+            <option value="student">Student</option>
+            <option value="teacher">Teacher</option>
+            <option value="administrator">Administrator</option>
+        </select><br><br>
+        <label for="password">Password:</label>
+        <input type="password" id="password" name="password" required><br><br>
+        <label for="catalogue">Catalogue:</label>
+        <input type="text" id="catalogue" name="catalogue" required><br><br>
+        <button type="submit">Save Element</button>
+        <button class="no-btn">Cancel</button>
+    </form>
+
         </div>
 
 
@@ -135,10 +142,9 @@
     </section>
 
 
-    <script src="../js/Acc-filter.js"></script>
-    <script src="cyclic.js"></script>
-    <script src="Account.js"></script>
+    <script src="../js/cyclic.js"></script>
 </body>
+<script src="../js/Account.js"></script>
 <script src="../js/Navbar.js"></script>
-<script src="Admin.js"></script>
+<script src="../js/Admin.js"></script>
 </html>
