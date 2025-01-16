@@ -21,7 +21,6 @@ function displayElements(filter = '') {
             <td><input type="checkbox" class="elementCheckbox" data-key="${key}"></td>
             <td>${element.name}</td>
             <td>${element.teacher}</td>
-            <td>${element.catalogue}</td>
             <td><button class="resetPassword" data-key="${key}">Reset Password</button></td>
         `;
         elementList.appendChild(tr);
@@ -62,13 +61,19 @@ window.onload = function() {
 
 document.getElementById('elementForm').addEventListener('submit', function(event) {
     event.preventDefault();
-    const name = document.getElementById('name').value;
-    const teacher = document.getElementById('teacher').value;
-    const password = document.getElementById('password').value;
-    const catalogue = document.getElementById('catalogue').value;
+    var name = document.getElementById('name').value;
+    var teacher = document.getElementById('teacher').value;
+    var password = document.getElementById('password').value;
+    var catalog = document.getElementById('catalog').value;
 
-    const element = { name, teacher, password, catalogue };
-    localStorage.setItem('ulrich', JSON.stringify(element));
+    const element = { name:name, teacher:teacher, password:password, catalog:catalog };
+    let TeacherData = JSON.parse(localStorage.getItem("ulrich")) || [];
+    // Add the new  to the array
+    TeacherData.push({ key: name });
+    localStorage.setItem('ulrich', JSON.stringify(TeacherData));
+    // Save the new user's detailed information in local storage
+    localStorage.setItem(name, JSON.stringify(element));
+
     alert('Element saved!');
     displayElements();
 });

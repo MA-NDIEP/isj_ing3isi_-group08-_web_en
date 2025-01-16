@@ -32,7 +32,7 @@ document.getElementById("addElementForm").addEventListener("submit", function (e
     // Save the updated student data back to local storage
     localStorage.setItem("studentData", JSON.stringify(studentData));
 
-    // Save the new user's detailed information in local storage (optional)
+    // Save the new user's detailed information in local storage
     localStorage.setItem(username, JSON.stringify(user));
 
     alert("Sign-up successful! Please login.");
