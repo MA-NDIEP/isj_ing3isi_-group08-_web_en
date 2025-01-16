@@ -25,7 +25,7 @@ document.getElementById('elementForm').addEventListener('submit', function(event
     }
   };
 
-
+//login form for experiment
   document.getElementById('loginForm').addEventListener('submit', function(event) {
     event.preventDefault();
     const name = document.getElementById('loginName').value;
@@ -36,6 +36,6 @@ document.getElementById('elementForm').addEventListener('submit', function(event
     } else if (element.password !== password) {
       alert('Wrong password');
     } else {
-      window.location.href = 'page2.html'; // Redirect to Page 2
+      window.location.href = 'Admin.html'; // Redirect to Page 2
     }
   });
